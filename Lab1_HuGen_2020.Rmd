@@ -1,5 +1,5 @@
 ---
-title: 'Lab 1 Human Genome Analysis 2020 : Introduction to R'
+title: 'Lab 1 Human Genome Analysis 2020 : Introduction to R and Reproducible Research'
 output:
   html_document:
     highlight: tango
