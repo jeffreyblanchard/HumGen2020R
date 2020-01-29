@@ -1,0 +1,61 @@
+---
+title: "697 Lab : Working on the Command Line"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: united
+    highlight: tango
+---
+
+## Learning objectives
+
+* Intro to BASH and working on the command line on OSX and Windows
+
+## Overview
+
+Working on high performance computer such as the Massachusetts Green High Performance Computing Center (MGHPCC) requires a basic working knowledge of the Bash a Unix shell and command language. On Apple OSX computers, including the BCRC's machine Bash is available through a program called Terminal. For the Python course I have developed a short tutorial for getting started. For those working on Windows machines, you will need to do this exercise on the BCRC or other Apple or Unix computers.  
+
+
+
+##nano
+
+The above text editors are great programs for working on your own computer. However, when you are working remotely (e.g. on the MGHPCC or other computers) you will often have to use a program that is install on their computers. One of the common unix text editors is nano. It is very simple and navigate using keystrokes (e.g. ctr x to exit). We will use it in the below tutorial.
+
+```console
+jeffb@mycomputer:~$ 
+
+```
+
+```{sh}
+pwd
+```
+
+
+
+## Text Editors
+
+Sometimes in this class we will need to manipulate simple text files and open and closing text files in Word sometimes generates unseen characters in the file that can cause problems in R and other programs.  A text editor is used to type computer programs and other documents and save the contents as files. We could just use Microsoft Word or Open Office, but word processing and text editing are very different things. Here are some popular free text editors. Please install one of these or another text editor of your choice on your computer
+
+### Mac OSX
+
+* <a href="https://www.barebones.com/products/bbedit/download.html" target="_blank">Free version of BBedit</a>
+
+### Windows
+
+* <a href="http://notepad-plus.sourceforge.net/uk/site.htm" target="_blank">Notepad++</a>
+* <a href="http://www.crimsoneditor.com/" target="_blank">Crimson Editor</a>
+* <a href="http://www.vim.org/download.php" target="_blank">GVim</a>
+
+In order to open .tar.gz files on a windows machine, you may need to install a program that can decompress these archive files. Ex. 
+
+* <a href="http://www.7-zip.org/" target="_blank"> 7-zip</a> (freeware)
+* <a href="http://www.sfsu.edu/ftp/win/utils/" target="_blank"> PowerArchiver</a> (freeware) 
+* <a href="http://www.winzip.com/index.htm" target="_blank"> Winzip</a> (commercial).
+* <a href="http://www.rarlab.com/" target="_blank"> WinRaR</a>. 
+
+### Ubuntu (Use Synaptic Package Manager to install)
+
+* gedit
+* Kate
+
