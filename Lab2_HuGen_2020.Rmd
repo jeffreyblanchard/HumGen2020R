@@ -250,41 +250,15 @@ Most of our class data will be in files that we import into R.  A common way to 
 
 The function read.table() is used to load these files into R.  This function reads a file in table format and creates a data frame from it.  By default, read.table uses ‘#’ as a comment character, and if this is encountered (except in quoted strings) the rest of the line is ignored. Lines containing only white space and a comment are treated as blank lines. The important fields in read.table are the file name, header and separator.
 
-```{r eval = FALSE}
-read.table("file.csv", header = TRUE, sep = ",")
-read.table("file.txt", header = TRUE, sep = "\t")
-```
 
-Often the header line has entries only for the columns and not for the row labels, so one field shorter than the remaining lines. (If R sees this, it sets header = TRUE.) If the first column is row names specific this using row.names = 1
-
-```{r eval = FALSE}
-read.table("file.dat", header = TRUE, , sep = "\t", row.names = 1)
-```
-
-### From Excel
-
-One of the best ways to read an Excel file is to export it to a comma delimited file and import it using the read.table() method above.  Alternatively you can use the xlsx package to access Excel files. You will first need to install the xlsx package. This may not not work on some operating systems (e.g. on my laptop running Ubuntu), but if it works for you, it is ok with me if you use this method.
-
-The first row should contain variable/column names.
-
-```{r eval = FALSE}
-# read in the first worksheet from the workbook myexcel.xlsx
-# first row contains variable names
-library(xlsx)
-mydata <- read.xlsx("c:/myexcel.xlsx", 1)
-
-# read in the worksheet named mysheet
-mydata <- read.xlsx("c:/myexcel.xlsx", sheetName = "mysheet")
-```
-
-## Loading a truncuated 23andMe file
+### Loading a truncuated 23andMe file
 
 Down load the 23andMe truncated file (23andMe_example_cat25.txt) from the Moodle site.  Open it up with your text editor (Notepad++, Text Wrangler, etc).  The file contains important background information that is demarked with #. There are 4 columns for the rsid number, chromosome number, chromosome position and the genotype.  
 
-The rsid number is used by researchers to refer to specific SNPs. It stands for Reference SNP cluster ID.  When researchers identify a SNP, they send the report, which includes the sequence immediately surrounding the SNP, to the dbSNP database - http://www.ncbi.nlm.nih.gov/SNP/ at the National Center for Biotechnology Information. Genome-wide association studies linking SNPs to traits or conditions usually report their results by rsid. The rsid numbers for SNPs in Health and Traits articles can be found in the technical report section.
+The rsid number is used by researchers to refer to specific SNPs. It stands for Reference SNP cluster ID.  When researchers identify a SNP, they send the report, which includes the sequence immediately surrounding the SNP, to the dbSNP database - http://www.ncbi.nlm.nih.gov/SNP/ at the National Center for Biotechnology Information. Genome-wide association studies linking SNPs to traits or conditions usually report their results by rsid. The rsid numbers for SNPs in Health and Traits articles can be found in the technical report section. I put my data files in a folder called data within my working directory.
 
 ```{r}
-SNP_table <- read.table("23andMe_example_cat25.txt", header = TRUE, sep = "\t")
+SNP_table <- read.table("data/23andMe_example_cat25.txt", header = TRUE, sep = "\t")
 SNP_table
 ```
 
@@ -397,7 +371,7 @@ What object type is chromosome?  Why is it different from the above SNP_table ex
 
 ### Exercise 6
 
-Make a table with the total number of each genotype. There may be unsual genotypes. 23andMe reports a very small number of deletions and insertions coded as D DD DI I II.  The double dash -- represents an uncertain (not reported) call at this position.
+Use the table function to calculate the total number of each genotype. There may be unsual genotypes. 23andMe reports a very small number of deletions and insertions coded as D DD DI I II.  The double dash -- represents an uncertain (not reported) call at this position.
 
 ### Exercise 7
 

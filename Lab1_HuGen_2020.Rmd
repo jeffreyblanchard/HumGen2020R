@@ -84,7 +84,7 @@ The default R studio appearance includes 4 windows.
 4. Files, plots, packages and help.
 
 ```{r pressure, echo=FALSE, fig.cap="Basic Layout in RStudio", out.width = '100%'}
-knitr::include_graphics("RStudio.png")
+knitr::include_graphics("images/RStudio.png")
 ```
 
 #### The R script(s) and data view window (upper left window)
