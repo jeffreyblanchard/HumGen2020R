@@ -2,15 +2,7 @@
 
 This is a repository for .Rmd and other files for the course Human Genome Analysis in R taught at the University of Massachusetts Amherst in Spring 2020 by Prof. Jeffrey Blanchard
 
-### Resources
-
-For the labs we will make extensive use of the following free resources
-
-    R for Data Science by Garrett Grolemund and Hadley Wickham
-    R Graphics Cookbook by Winston Chang
-    Data Carpentries Genomic Workshop Sessions
-    BioConductor Workflows
-    Tutorials for individual R packages
+## The Github page with rendering of the html files is at https://jeffreyblanchard.github.io/GenomeAnalysisR/
 
 ## Labs
 
@@ -23,8 +15,8 @@ For the labs we will make extensive use of the following free resources
 
 * 3 : Graphics with ggplot2
 * 4 : More Graphics with ggplot2
-* 5 : Aggregating and Analyzing Data with dplyr
-* 6 : Data Wrangling with tibbles
+* 5 : Data Wrangling
+* 6 : Publication Graphics
 
 ### RNA-seq Analysis
 

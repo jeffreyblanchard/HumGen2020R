@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1581609098832.000,
+    "created" : 1581611579729.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "0",
-    "id" : "8EDEE727",
-    "lastKnownWriteTime" : 1581611181,
-    "last_content_update" : 1581611181264,
+    "id" : "EA641C0",
+    "lastKnownWriteTime" : 1581611523,
+    "last_content_update" : 1581611523,
     "path" : "~/jlb@umass.edu/GoEcology/Courses/583-AdvGen/2020_Spring/GenomeAnalysisR/README.md",
     "project_path" : "README.md",
     "properties" : {
@@ -18,7 +18,7 @@
     "read_only" : false,
     "read_only_alternatives" : [
     ],
-    "relative_order" : 1,
+    "relative_order" : 3,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "markdown"
