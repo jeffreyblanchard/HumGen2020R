@@ -16,8 +16,8 @@ For the labs we will make extensive use of the following free resources
 
 ### R Basics
 
-* 1 : (Introduction to R and Reproducible Research)[Lab1_HuGen_2020.html]
-* 2 : Basic R Object types and Producing Reports With knitr
+* 1 : [Introduction to R and Reproducible Research](Lab1_HuGen_2020.html)
+* 2 : [Basic R Object types](Lab2_HuGen_2020.html) and [Producing Reports With knitr](Lab2B_HuGen_2020.html)
 
 ### The R Tidyverse
 
