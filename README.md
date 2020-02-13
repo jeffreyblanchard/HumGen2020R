@@ -13,10 +13,10 @@ This is a repository for .Rmd and other files for the course Human Genome Analys
 
 ### The R Tidyverse
 
-* 3 : Graphics with ggplot2
-* 4 : More Graphics with ggplot2
+* 3 : [Graphics with ggplot2](Lab3_HuGen_2020.html)
+* 4 : [Publication Graphics](Lab4_HuGen_2020.html)
 * 5 : Data Wrangling
-* 6 : Publication Graphics
+* 6 : Github and Collaborative Projects
 
 ### RNA-seq Analysis
 
