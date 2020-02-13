@@ -15,8 +15,8 @@ This is a repository for .Rmd and other files for the course Human Genome Analys
 
 * 3 : Graphics with ggplot2
 * 4 : More Graphics with ggplot2
-* 5 : Aggregating and Analyzing Data with dplyr
-* 6 : Data Wrangling with tibbles
+* 5 : Data Wrangling
+* 6 : Publication Graphics
 
 ### RNA-seq Analysis
 

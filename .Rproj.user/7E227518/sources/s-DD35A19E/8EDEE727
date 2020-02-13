@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3071817234",
+    "hash" : "0",
     "id" : "8EDEE727",
-    "lastKnownWriteTime" : 1581611022,
-    "last_content_update" : 1581610862796,
+    "lastKnownWriteTime" : 1581611181,
+    "last_content_update" : 1581611181264,
     "path" : "~/jlb@umass.edu/GoEcology/Courses/583-AdvGen/2020_Spring/GenomeAnalysisR/README.md",
     "project_path" : "README.md",
     "properties" : {
-        "cursorPosition" : "7,0",
-        "scrollLine" : "0"
+        "cursorPosition" : "24,29",
+        "scrollLine" : "13"
     },
     "read_only" : false,
     "read_only_alternatives" : [
