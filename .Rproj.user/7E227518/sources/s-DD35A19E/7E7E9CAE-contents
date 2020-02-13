@@ -1,0 +1,20 @@
+---
+title: "NCEAS Reproducible Research Worskhop"
+author: "Jeffrey Blanchard"
+date: "2/4/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis Plan for training
+
+- [Data Cleaning](data-cleaning.html)
+- Data Models
+- [Visualization](ggplot_training.html)
+- Manuscript
+- test
