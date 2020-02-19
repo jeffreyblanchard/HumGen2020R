@@ -90,16 +90,6 @@ summary(SNPs$chromosome)
 
 We have only scratched the surface here. To learn more, see the [ggplot reference site](http://docs.ggplot2.org/), and Winston Chang's excellent [Cookbook for R](http://wiki.stdout.org/rcookbook/Graphs/) site. Though slightly out of date, [ggplot2: Elegant Graphics for Data Anaysis](http://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403) is still the definative book on this subject. Here is a nice comparison of basic and ggplot graphs - http://www.fdawg.org/FDAWG/Tutorials/ggplot2.html.  Here is another good tutorial - https://rpubs.com/mccannecology/53464
 
----
-title: "Human Genome Analysis Lab 3 : Key"
-output:
-  html_document:
-    toc: true
-    toc_depth: 4
-    theme: united
-    highlight: tango
----
-
 
 ## Exercises
 
@@ -135,8 +125,4 @@ Now place genotypes directly beside one another for each chromosome to compare i
 ### Exercise 6
 
 The above graph is pretty hard to read. Try using facet_wrap with the genotype
-
-
-
-
 
