@@ -496,140 +496,30 @@ summary {
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span> (tidyverse)</a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">SNPs &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;data/23andMe_complete.txt&quot;</span>, <span class="dt">skip =</span> <span class="dv">14</span>, <span class="dt">col_types =</span> </a>
 <a class="sourceLine" id="cb9-2" title="2">  <span class="kw">cols</span>(<span class="dt">chromosome =</span> <span class="kw">col_factor</span>()))</a></code></pre></div>
-<p>Use Pipes when applicable in your code and use the common dplyr functions for the exercises</p>
+<p>Use Pipes when applicable in your code and use the common dplyr functions for the exercises. It is sufficient to show just the 10 lines that are output from the code block (if using pipes)</p>
 <div id="exercise-1" class="section level3">
 <h3>Exercise 1</h3>
 <p>Subset (select) the 23andMe Complete table to just position and genotype</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">SNPs <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw">select</span>(position, genotype)</a></code></pre></div>
-<pre><code>## # A tibble: 960,614 x 2
-##    position genotype
-##       &lt;dbl&gt; &lt;chr&gt;   
-##  1    82154 AA      
-##  2   752566 AA      
-##  3   752721 GG      
-##  4   776546 AG      
-##  5   798959 AG      
-##  6   800007 CC      
-##  7   838555 AC      
-##  8   846808 CT      
-##  9   854250 AG      
-## 10   861808 GG      
-## # … with 960,604 more rows</code></pre>
 </div>
 <div id="exercise-2" class="section level3">
 <h3>Exercise 2</h3>
-<p>filter to just the MT chromosome and remove genotypes A and T.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">SNPs <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">filter</span>(chromosome <span class="op">==</span><span class="st"> &quot;MT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="st">  </span><span class="kw">filter</span>(genotype <span class="op">!=</span><span class="st"> &quot;A&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span><span class="kw">filter</span>(genotype <span class="op">!=</span><span class="st"> &quot;T&quot;</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 1,071 x 4
-##    rsid     chromosome position genotype
-##    &lt;chr&gt;    &lt;fct&gt;         &lt;dbl&gt; &lt;chr&gt;   
-##  1 i4001358 MT                9 G       
-##  2 i4000553 MT               26 C       
-##  3 i4001190 MT               41 C       
-##  4 i4000964 MT               43 C       
-##  5 i3001932 MT               53 G       
-##  6 i3002014 MT               54 G       
-##  7 i3000804 MT               61 C       
-##  8 i3000991 MT               62 G       
-##  9 i3001266 MT               64 C       
-## 10 i3001438 MT               68 G       
-## # … with 1,061 more rows</code></pre>
+<p>Filter to just the MT chromosome and remove genotypes A and T.</p>
 </div>
 <div id="exercise-3" class="section level3">
 <h3>Exercise 3</h3>
 <p>Use group_by() and summarize() to find the min positon, max position and total number of positions for each chromosomes.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">SNPs <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(chromosome) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb14-4" title="4">    <span class="dt">min_position =</span> <span class="kw">min</span>(position),</a>
-<a class="sourceLine" id="cb14-5" title="5">    <span class="dt">max_position =</span> <span class="kw">max</span>(position),</a>
-<a class="sourceLine" id="cb14-6" title="6">    <span class="dt">n =</span> <span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb14-7" title="7">  )</a></code></pre></div>
-<pre><code>## # A tibble: 25 x 4
-##    chromosome min_position max_position     n
-##    &lt;fct&gt;             &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;
-##  1 1                 82154    249218992 76909
-##  2 2                 18674    243048760 77346
-##  3 3                 61495    197838262 63285
-##  4 4                 71566    190963766 55017
-##  5 5                 27564    180696889 56019
-##  6 6                155815    170919470 63245
-##  7 7                 44935    159119486 50965
-##  8 8                164984    146293414 49215
-##  9 9                 46587    141066491 42969
-## 10 10                98087    135508269 50322
-## # … with 15 more rows</code></pre>
 </div>
 <div id="exercise-4" class="section level3">
 <h3>Exercise 4</h3>
 <p>Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the max position - min position divide by the total number of SNPs</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">SNPs <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(chromosome) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb16-4" title="4">    <span class="dt">min_position =</span> <span class="kw">min</span>(position),</a>
-<a class="sourceLine" id="cb16-5" title="5">    <span class="dt">max_position =</span> <span class="kw">max</span>(position),</a>
-<a class="sourceLine" id="cb16-6" title="6">    <span class="dt">n =</span> <span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb16-7" title="7">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SNP_density =</span> (max_position <span class="op">-</span><span class="st"> </span>min_position) <span class="op">/</span><span class="st"> </span>n)</a></code></pre></div>
-<pre><code>## # A tibble: 25 x 5
-##    chromosome min_position max_position     n SNP_density
-##    &lt;fct&gt;             &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;
-##  1 1                 82154    249218992 76909       3239.
-##  2 2                 18674    243048760 77346       3142.
-##  3 3                 61495    197838262 63285       3125.
-##  4 4                 71566    190963766 55017       3470.
-##  5 5                 27564    180696889 56019       3225.
-##  6 6                155815    170919470 63245       2700.
-##  7 7                 44935    159119486 50965       3121.
-##  8 8                164984    146293414 49215       2969.
-##  9 9                 46587    141066491 42969       3282.
-## 10 10                98087    135508269 50322       2691.
-## # … with 15 more rows</code></pre>
 </div>
 <div id="exercise-5" class="section level3">
 <h3>Exercise 5</h3>
 <p>Building on ex3 sort chromosomes based on SNP density.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">SNPs <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(chromosome) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb18-4" title="4">    <span class="dt">min_position =</span> <span class="kw">min</span>(position),</a>
-<a class="sourceLine" id="cb18-5" title="5">    <span class="dt">max_position =</span> <span class="kw">max</span>(position),</a>
-<a class="sourceLine" id="cb18-6" title="6">    <span class="dt">n =</span> <span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb18-7" title="7">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SNP_density =</span> (max_position <span class="op">-</span><span class="st"> </span>min_position) <span class="op">/</span><span class="st"> </span>n) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-9" title="9"><span class="st">  </span><span class="kw">arrange</span>(SNP_density)</a></code></pre></div>
-<pre><code>## # A tibble: 25 x 5
-##    chromosome min_position max_position     n SNP_density
-##    &lt;fct&gt;             &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;       &lt;dbl&gt;
-##  1 MT                    3        16567  2459        6.74
-##  2 22             16114244     51211392 14100     2489.  
-##  3 20                63244     62912463 23834     2637.  
-##  4 13             19058717    115103529 36078     2662.  
-##  5 10                98087    135508269 50322     2691.  
-##  6 6                155815    170919470 63245     2700.  
-##  7 21             10827533     48100155 13404     2781.  
-##  8 18                13034     78015180 27971     2789.  
-##  9 11               198510    134940416 47972     2809.  
-## 10 12               191619    133777645 47125     2835.  
-## # … with 15 more rows</code></pre>
 </div>
 <div id="exercise-6" class="section level3">
 <h3>Exercise 6</h3>
 <p>Export the above table as a csv file to your data directory (There will be no results except the code to show me). However you will get an error when knitting if the code is not correct.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">SNP_density_table &lt;-<span class="st"> </span>SNPs <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(chromosome) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb20-4" title="4">    <span class="dt">min_position =</span> <span class="kw">min</span>(position),</a>
-<a class="sourceLine" id="cb20-5" title="5">    <span class="dt">max_position =</span> <span class="kw">max</span>(position),</a>
-<a class="sourceLine" id="cb20-6" title="6">    <span class="dt">n =</span> <span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb20-7" title="7">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">SNP_density =</span> (max_position <span class="op">-</span><span class="st"> </span>min_position) <span class="op">/</span><span class="st"> </span>n) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-9" title="9"><span class="st">  </span><span class="kw">arrange</span>(SNP_density)</a>
-<a class="sourceLine" id="cb20-10" title="10"><span class="kw">write_csv</span>(SNP_density_table, <span class="dt">path =</span> <span class="st">&quot;data/SNP_density_table.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 

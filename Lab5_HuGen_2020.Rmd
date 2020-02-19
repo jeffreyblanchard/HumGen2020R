@@ -93,89 +93,31 @@ SNPs <- read_tsv("data/23andMe_complete.txt", skip = 14, col_types =
   cols(chromosome = col_factor()))
 ```
 
-Use Pipes when applicable in your code and use the common dplyr functions for the exercises
+Use Pipes when applicable in your code and use the common dplyr functions for the exercises. It is sufficient to show just the 10 lines that are output from the code block (if using pipes)
 
 ### Exercise 1
 
 Subset (select) the 23andMe Complete table to just position and genotype
 
-
-```{r}
-SNPs %>% 
-  select(position, genotype)
-```
-
 ### Exercise 2
 
-filter to just the MT chromosome and remove genotypes A and T. 
-
-```{r}
-SNPs %>% 
-  filter(chromosome == "MT") %>% 
-  filter(genotype != "A") %>% 
-  filter(genotype != "T")
-```
-
+Filter to just the MT chromosome and remove genotypes A and T. 
 
 ### Exercise 3
 
 Use group_by() and summarize() to find the min positon, max position and total number of positions for each chromosomes. 
 
-```{r}
-SNPs %>% 
-  group_by(chromosome) %>% 
-  summarize(
-    min_position = min(position),
-    max_position = max(position),
-    n = n()
-  )
-```
-
-
 ### Exercise 4
 
 Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the max position - min position divide by the total number of SNPs
-
-```{r}
-SNPs %>% 
-  group_by(chromosome) %>% 
-  summarize(
-    min_position = min(position),
-    max_position = max(position),
-    n = n()
-  ) %>% 
-  mutate(SNP_density = (max_position - min_position) / n)
-```
 
 ### Exercise 5
 
 Building on ex3 sort chromosomes based on SNP density.
 
-```{r}
-SNPs %>% 
-  group_by(chromosome) %>% 
-  summarize(
-    min_position = min(position),
-    max_position = max(position),
-    n = n()
-  ) %>% 
-  mutate(SNP_density = (max_position - min_position) / n) %>% 
-  arrange(SNP_density)
-```
 
 ### Exercise 6
 
 Export the above table as a csv file to your data directory (There will be no results except the code to show me). However you will get an error when knitting if the code is not correct.
 
-```{r}
-SNP_density_table <- SNPs %>% 
-  group_by(chromosome) %>% 
-  summarize(
-    min_position = min(position),
-    max_position = max(position),
-    n = n()
-  ) %>% 
-  mutate(SNP_density = (max_position - min_position) / n) %>% 
-  arrange(SNP_density)
-write_csv(SNP_density_table, path = "data/SNP_density_table.csv")
-```
+
