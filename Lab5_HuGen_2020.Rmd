@@ -102,7 +102,7 @@ Subset (select) the 23andMe Complete table to just position and genotype
 
 ### Exercise 2
 
-Filter to just the MT chromosome and remove genotypes A and T. 
+Filter to just the MT chromosome and remove genotypes A and T. (you can use != to remove)
 
 ### Exercise 3
 
