@@ -24,7 +24,7 @@ I don't like to my .Rmd file cluttered by graphs R code outputs outputs. The def
 
 ### Cleaning up our folders
 
-As the semester goes on your working directory is going to get pretty full. This is a good point to create more structure to the folder. Now let's be consistent in our naming of the files. Rename your lab .R, .Rmd and .html files so that there names are consistent (e.g. lab1.Rmd, lab2.Rmd, lab3.Rmd) across all the labs. Go to your workding directory and create new directories "data", "images" and "notesR" (you can do this in RStudion by clicking "New Folder"). Move your 23andMe files into the data folder. Move the image files from last week (png, jpg, etc) in to the image folder. From now on put your data and images in these folders. Put your .R and other notes files in the notesR folder.
+As the semester goes on your working directory is going to get pretty full. This is a good point to create more structure to the folder. Now let's be consistent in our naming of the files. Rename your lab .R, .Rmd and .html files so that there names are consistent (e.g. lab1.Rmd, lab2.Rmd, lab3.Rmd) across all the labs. Go to your workding directory and create new directories "data", "images" and "old_notesR" (you can do this in RStudion by clicking "New Folder"). Move your 23andMe files into the data folder. Move the image files from last week (png, jpg, etc) in to the image folder. From now on put your data and images in these folders. Put your .R and other notes files in the old_notesR folder.
 
 ### Accessing files that are not in your working directory
 
@@ -75,6 +75,7 @@ For this tutorial you will need to download a file from Figshare, a relatively n
 In the Data Carpentries tutorial be sure to change the path to the data file from data_raw to data
 
 ```{r, eval=FALSE}
+library (tidyverse)
 surveys <- read_csv("data/portal_data_joined.csv")
 ```
 
@@ -109,7 +110,7 @@ Use group_by() and summarize() to find the min positon, max position and total n
 
 ### Exercise 4
 
-Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the max position - min position divide by the total number of SNPs
+Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the total number of SNPs divided by the max position - min position
 
 ### Exercise 5
 
@@ -119,5 +120,4 @@ Building on ex3 sort chromosomes based on SNP density.
 ### Exercise 6
 
 Export the above table as a csv file to your data directory (There will be no results except the code to show me). However you will get an error when knitting if the code is not correct.
-
 

@@ -457,7 +457,7 @@ summary {
 </div>
 <div id="cleaning-up-our-folders" class="section level3">
 <h3>Cleaning up our folders</h3>
-<p>As the semester goes on your working directory is going to get pretty full. This is a good point to create more structure to the folder. Now let’s be consistent in our naming of the files. Rename your lab .R, .Rmd and .html files so that there names are consistent (e.g. lab1.Rmd, lab2.Rmd, lab3.Rmd) across all the labs. Go to your workding directory and create new directories “data”, “images” and “notesR” (you can do this in RStudion by clicking “New Folder”). Move your 23andMe files into the data folder. Move the image files from last week (png, jpg, etc) in to the image folder. From now on put your data and images in these folders. Put your .R and other notes files in the notesR folder.</p>
+<p>As the semester goes on your working directory is going to get pretty full. This is a good point to create more structure to the folder. Now let’s be consistent in our naming of the files. Rename your lab .R, .Rmd and .html files so that there names are consistent (e.g. lab1.Rmd, lab2.Rmd, lab3.Rmd) across all the labs. Go to your workding directory and create new directories “data”, “images” and “old_notesR” (you can do this in RStudion by clicking “New Folder”). Move your 23andMe files into the data folder. Move the image files from last week (png, jpg, etc) in to the image folder. From now on put your data and images in these folders. Put your .R and other notes files in the old_notesR folder.</p>
 </div>
 <div id="accessing-files-that-are-not-in-your-working-directory" class="section level3">
 <h3>Accessing files that are not in your working directory</h3>
@@ -487,7 +487,8 @@ summary {
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"> <span class="kw">download.file</span>(<span class="dt">url=</span><span class="st">&quot;https://ndownloader.figshare.com/files/2292169&quot;</span>,</a>
 <a class="sourceLine" id="cb6-2" title="2">              <span class="dt">destfile =</span> <span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</a></code></pre></div>
 <p>In the Data Carpentries tutorial be sure to change the path to the data file from data_raw to data</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span> (tidyverse)</a>
+<a class="sourceLine" id="cb7-2" title="2">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -511,7 +512,7 @@ summary {
 </div>
 <div id="exercise-4" class="section level3">
 <h3>Exercise 4</h3>
-<p>Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the max position - min position divide by the total number of SNPs</p>
+<p>Building on ex3 create using mutate a new column with the density of SNPs for each chromosome based the total number of SNPs divided by the max position - min position</p>
 </div>
 <div id="exercise-5" class="section level3">
 <h3>Exercise 5</h3>
