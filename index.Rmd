@@ -1,13 +1,8 @@
 ---
-title: "Human Genome Analysis"
-author: "Jeffrey Blanchard"
-date: "2/4/2020"
 output:
   html_document: default
   pdf_document: default
 ---
-
-# GenomeAnalysisR
 
 This is a repository for .Rmd and other files for the course Human Genome Analysis in R taught at the University of Massachusetts Amherst in Spring 2020 by Prof. Jeffrey Blanchard
 
