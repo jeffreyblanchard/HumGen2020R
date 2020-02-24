@@ -290,19 +290,15 @@ In the settings tab for your repo you can add several features.
 
 ### Github project management
 
-You can keep tract of ideas, todos and fixies using the Project tab on Github
+You can keep tract of ideas, todos and fixes by creating a wiki or using the Project
 
 ![Managing projects on Github](images/Project_Acidos.png)
 
 ### Github web pages
 
-You can enable Github pages to create a web presence for your project. The default web pages in the README.md file. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).
-
-
-
+You can enable Github pages to create a web presence for your project. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).
 
 ## Collaboration (we walk talk more about this later in the class)
-
 
 ### conflict free workflows 
 Up to now, we have been focused on using Git and GitHub for yourself, which is a 
