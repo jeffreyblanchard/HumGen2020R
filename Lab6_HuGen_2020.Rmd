@@ -16,11 +16,9 @@ In this lesson, you will learn:
 
 - What computational reproducibility is and why it is useful
 - How version control can increase computational reproducibility
-- How to set up git
-- How to use __git__ to track changes to your work over time
-- How to use __GitHub__ to collaborate with others
-- How to structure your commits so your changes are clear to others
-- How to write effective commit messages
+- to set up git on your computer
+- to use git and github to track changes to your work over time
+- How to add references to your report
 
 ## Reproducible Research
 
@@ -59,8 +57,6 @@ of a workflow, and when researchers publish specific versions of the scripts and
 data used in an analysis, it becomes far easier to repeat their computations and 
 understand the provenance of their conclusions.
 
-## Version Control With git and GitHub
-
 ### The problem with filenames
 
 Every file in the scientific process changes.  Manuscripts are edited.
@@ -89,7 +85,7 @@ exact versions of data, code, and narrative that were used when a manuscript was
 submitted might be `eco-ms-1` in the graph above, and then when it was revised and resubmitted,
 it was done with tag `eco-ms-2`.  A different paper was started and submitted with tag `dens-ms-1`, showing that you can be working on multiple manuscripts with closely related but not identical sets of code and data being used for each, and keep track of it all.
 
-### Version control and Collaboration using Git and GitHub
+## Version control and Collaboration using Git and GitHub
 
 First, just what are `git` and GitHub?
 
@@ -135,7 +131,7 @@ local repository.
 Those seven commands are the majority of what you need to successfully use git.  
 But this is all super abstract, so let's explore with some real examples.
 
-## Setting up git on your computer
+### Setting up git on your computer
 
 * Download [git](https://git-scm.com/downloads).
 * Go to [github.com](http://github.com) and create an account. 
@@ -178,7 +174,7 @@ If you get "command not found" (or similar) when you try these steps through the
 
 In addition, some versions of windows have difficults with the command line if you are using an account name with spaces in it (such as "Matt Jones", rather than something like "mbjones").  You may need to use an account name without spaces.
 
-## Create a remote repository on GitHub
+### Create a remote repository on GitHub
 
 Let's start by creating a repository on GitHub, then we'll edit some files.
 
@@ -217,7 +213,7 @@ to `clone` the repository onto your local machine so that you can edit the files
 in RStudio.  To do so, start by copying the GitHub URL, which represents the repository
 location:
 
-## Working locally with Git via RStudio
+### Working locally with Git via RStudio
 
 RStudio knows how to work with files under version control with Git, but only if
 you are working within an RStudio project folder.  In this next section, we will
@@ -266,7 +262,7 @@ __Commit a README.md change.__ Next let's make a change to the README.md file
 in RStudio. Add a new section, with a markdown block like this:
 
 
-## On good commit messages
+### On good commit messages
 
 Clearly, good documentation of what you've done is critical to making the version
 history of your repository meaningful and helpful.  Its tempting to skip the 
@@ -284,10 +280,6 @@ This keeps the high level details readable in the version log.  I can't count th
 number of times I've looked at the commit log from 2, 3, or 10 years prior and
 been so grateful for diligence of my past self and collaborators.
 
-## Other Github features for this class
-
-In the settings tab for your repo you can add several features.
-
 ### Github project management
 
 You can keep tract of ideas, todos and fixes by creating a wiki or using the Project
@@ -296,11 +288,10 @@ You can keep tract of ideas, todos and fixes by creating a wiki or using the Pro
 
 ### Github web pages
 
-You can enable Github pages to create a web presence for your project. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).
+You can enable Github pages to create a web presence for your project. Under the settings tab enable Github pages.  You can put the web files in the main directory or rename your "html" folder "docs" and put them there. It takes about 10 min for the web site to appear. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).  
 
-## Collaboration (we walk talk more about this later in the class)
+### Collaboration and conflict free workflows(we walk talk more about this later in the class)
 
-### conflict free workflows 
 Up to now, we have been focused on using Git and GitHub for yourself, which is a 
 great use. But equally powerful is to share a GitHib repository with other
 researchers so that you can work on code, analyses, and models together.  When
@@ -321,14 +312,90 @@ You can minimize conflicts by:
 - Coordinate with your collaborators on who is touching which files
   + You still need to comunicate to collaborate
 
-## More with git
+### More with git
 
 There's a lot we haven't covered in this brief tutorial.  There are some great
-and much longer tutorials that cover advanced topics, see
+and longer tutorials that cover additional topics:
 
+* [Happy Git and Github for the useR](https://happygitwithr.com/)
 * [Try Git](https://try.github.io) a great interactive tutorial
 * Software Carpentry [Version Control with Git](http://swcarpentry.github.io/git-novice/)
 
 
+## Adding references to your report
+
+You can automatically generate citations and a bibliography in a number of styles. In order to use this feature, you will need to specify a bibliography file using the bibliography metadata field in a YAML metadata section. For example:
+
+---
+title: "Sample Document"
+output: html_document
+bibliography: bibliography.bib
+---
+
+The bibliography may have any of these formats:
+
+|Format    |File extension|
+|----------|--------------|
+|MODS |.mods|
+|BibLaTeX|.bib|
+|BibTeX|.bibtex|
+|RIS|.ris|
+|EndNote|.enl|
+|EndNote XML|.xml|
+|ISI|.wos|
+|MEDLINE|.medline|
+|Copac|.copac|
+|JSON citeproc|.json|
+
+You can export references from your favorite reference manager. I use the open source [Zotero](www.zotero.org).
+
+### Minimum working example
+
+If you create this two files paper.Rmd and references.bib you will have a working example to build from
+paper.Rmd
+
+```
+
+---
+title: 'My Title'
+author: "Me me me me!"
+output: html_document
+bibliography: data/references.bib
+---
+
+Application written in R [@RCoreTeam] using the Shiny framework [@Chang2015].
+
+# REFERENCES
+```
+
+references.bib (Make this file as a text file (File -> New File -> text file))
+
+```
+@Misc{Chang2015,
+  Title                    = {shiny: Web Application Framework for R. R package version 0.12.1},
+
+  Author                   = {Chang, W. and Cheng, J. and Allaire, JJ. and Xie, Y. and McPherson, J. },
+  Year                     = {2015},
+
+  Type                     = {Computer Program},
+  Url                      = {http://CRAN.R-project.org/package=shiny}
+}
 
 
+@Article{RCoreTeam,
+  Title                    = {R: A Language and Environment for Statistical Computing},
+  Author                   = {{R Core Team}},
+  Year                     = {2015},
+
+  Type                     = {Journal Article},
+  Url                      = {http://www.R-project.org}
+}
+```
+
+Here is a short example of a manuscript style report [Reproducible Papers with RMarkdown](https://nceas.github.io/oss-lessons/reproducible-papers-with-rmd/reproducible-papers-with-rmd.html)
+
+## Exercises
+
+For this lab you will need to create a Github repo and website. The web site should have links to your labs 3-6 and include at least one reference.  
+
+To complete the assignment on Moodel paste your Github URL into the text box.
