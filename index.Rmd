@@ -31,7 +31,7 @@ This is an html rendering of the repository (https://github.com/jeffreyblanchard
 
 ### Students taking 697 version will be expected to complete these following additional labs
 
-* 13 : Project Organization and Management
+* 13 : [Project Organization and Management](https://datacarpentry.org/organization-genomics/01-tidiness/index.html)
 * 14 : The Command Line
 * 15 : Working on the MGPCC computers
 * 16 : Assessing Read Quality

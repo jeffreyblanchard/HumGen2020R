@@ -10,6 +10,8 @@ editor_options:
   chunk_output_type: inline
 ---
 
+Much of the material for this lesson was borrowed from or inspired by Matt Jones' NCEAS Reproducible Research Techniques for Synthesis workshop](https://learning.nceas.ucsb.edu/2020-02-RRCourse/)
+
 ## Learning Objectives
 
 In this lesson, you will learn:
@@ -180,7 +182,7 @@ Let's start by creating a repository on GitHub, then we'll edit some files.
 
 - Log into [GitHub](https://github.com)
 - Click the New repository button
-- Name it `training-test`
+- Name it `genome-analysis`
 - Create a README.md
 - Set the LICENSE to Apache 2.0
 - Add a .gitignore file for `R`
@@ -242,12 +244,12 @@ is configured, the location and size of the panes may differ, but they should al
 be present, including a *Git* tab and the normal *Files* tab listing the files that 
 had been created in the remote repository.
 
-You'll note that there is one new file `training-test.Rproj`, and three files that we
+You'll note that there is one new file `genome-analysis.Rproj`, and three files that we
 created earlier on GitHub (`.gitignore`, `LICENSE`, and `README.md`).
 
 In the *Git* tab, you'll note that two files are listed.  This is the status pane
 that shows the current modification status of all of the files in the repository.
-In this case, the `.gitignore` file is listed as *M* for Modified, and `training-test.Rproj` 
+In this case, the `.gitignore` file is listed as *M* for Modified, and `genome-analysis.Rproj` 
 is listed with a *? ?* to indicate that the file is untracked.  This means that
 git has not stored any versions of this file, and knows nothing about the file.
 As you make version control decisions in RStudio, these icons will change to reflect
@@ -258,9 +260,9 @@ log of changes that occurred, and will be identical to what we viewed on GitHub.
 By clicking on each row of the history, you can see exactly what was added and
 changed in each of the two commits in this repository.
 
-__Commit a README.md change.__ Next let's make a change to the README.md file
-in RStudio. Add a new section, with a markdown block like this:
+__Move your old course files into this new directory.__ Put your .html files into the main directory and delete the html folder.
 
+__Add, Commit and Push the changes (new files) to the Github repo.__ First check the files you want to add. Then click Commit. Write a message to describe the changes (see below on good commit messages.). The Push the changes to the Github repo. Examine the changes in the repo.
 
 ### On good commit messages
 
@@ -288,7 +290,7 @@ You can keep tract of ideas, todos and fixes by creating a wiki or using the Pro
 
 ### Github web pages
 
-You can enable Github pages to create a web presence for your project. Under the settings tab enable Github pages.  You can put the web files in the main directory or rename your "html" folder "docs" and put them there. It takes about 10 min for the web site to appear. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).  
+You can enable Github pages to create a web presence for your project. Under the settings tab enable Github pages.  It takes about 10 min for the web site to appear. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).  
 
 ### Collaboration and conflict free workflows(we walk talk more about this later in the class)
 
@@ -334,18 +336,18 @@ bibliography: bibliography.bib
 
 The bibliography may have any of these formats:
 
-|Format    |File extension|
-|----------|--------------|
-|MODS |.mods|
-|BibLaTeX|.bib|
-|BibTeX|.bibtex|
-|RIS|.ris|
-|EndNote|.enl|
-|EndNote XML|.xml|
-|ISI|.wos|
-|MEDLINE|.medline|
-|Copac|.copac|
-|JSON citeproc|.json|
+Format    |File extension
+----------|--------------
+MODS |.mods
+BibLaTeX|.bib
+BibTeX|.bibtex
+RIS|.ris
+EndNote|.enl
+EndNote XML|.xml
+ISI|.wos
+|MEDLINE|.medline
+|Copac|.copac
+|JSON citeproc|.json
 
 You can export references from your favorite reference manager. I use the open source [Zotero](www.zotero.org).
 
@@ -396,6 +398,34 @@ Here is a short example of a manuscript style report [Reproducible Papers with R
 
 ## Exercises
 
-For this lab you will need to create a Github repo and website. The web site should have links to your labs 3-6 and include at least one reference.  
+For this lab you will need to create a Github repo and website. The web site should have links to your labs 3-6 and include at least one reference. To complete the assignment on Moodel paste your Github URL into the text box. 
 
-To complete the assignment on Moodel paste your Github URL into the text box.
+Here is an outline of the steps you should go through today.
+
+1. Download git to your computer
+2. Create a personal Github account
+3. Create a Github repository "genome-analysis"
+4. In your working directory create a project file and paste the URL from the Github repo clone button into the appropriate box
+5. Move your course files into the genome-analysis directory. Move your .html files from the html folder to the main directory. Delete the html folder.
+6. Add, Commit and Push these changes and files to the Github repo.
+7. Create a .Rmd file and name it index.Rmd. The knit version index.html will be your web page.
+8. In the index.Rmd file add links to the .html files for lab reports 3-6. 
+9. Create a bibiography file and put it in your data folder. Add the line to your YAML block at the beginning of your index.Rmd file.
+
+```
+title: "Human Genome Analysis"
+author: "Jeffrey Blanchard"
+date: "2/26/2020"
+output: html_document
+bibliography: data/bibliography.bib
+```
+  
+10. Add a reference to your index.Rmd file. Don't forget to include the # REFERENCE block at the end of the file.
+11. Knit your index.Rmd file. Test the resulting .html file to make sure the links work.
+12. Embellish the index file (web page) with your own personal touches!
+13. Add, Commit and Push these changes and files to the Github repo.
+14. Check your Github page to make sure all is well.
+15. Paste your Github page link into the Moodle Assignment page.
+
+
+

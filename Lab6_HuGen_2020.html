@@ -454,6 +454,7 @@ summary {
 </ul>
 </div>
 
+<p>Much of the material for this lesson was borrowed from or inspired by Matt Jones’ NCEAS Reproducible Research Techniques for Synthesis workshop](<a href="https://learning.nceas.ucsb.edu/2020-02-RRCourse/" class="uri">https://learning.nceas.ucsb.edu/2020-02-RRCourse/</a>)</p>
 <div id="learning-objectives" class="section level2">
 <h2>Learning Objectives</h2>
 <p>In this lesson, you will learn:</p>
@@ -547,7 +548,7 @@ But this is all super abstract, so let’s explore with some real examples.</p>
 <ul>
 <li>Log into <a href="https://github.com">GitHub</a></li>
 <li>Click the New repository button</li>
-<li>Name it <code>training-test</code></li>
+<li>Name it <code>genome-analysis</code></li>
 <li>Create a README.md</li>
 <li>Set the LICENSE to Apache 2.0</li>
 <li>Add a .gitignore file for <code>R</code></li>
@@ -573,10 +574,11 @@ But this is all super abstract, so let’s explore with some real examples.</p>
 </ul>
 <p><strong>Create a New Project.</strong> Start by creating a <em>New Project…</em> in R Studio, select the <em>Version Control</em> option, and paste the GitHub URL that you copied into the field for the remote repository <em>Repository URL</em>. While you can name the local copy of the repository anything, its typical to use the same name as the GitHub repository to maintain the correspondence. You can choose any folder for your local copy, in my case I used ’git-genome-analysis` folder.</p>
 <p>Once you hit `Create Project, a new RStudio windo will open with all of the files from the remote repository copied locally. Depending on how your version of RStudio is configured, the location and size of the panes may differ, but they should all be present, including a <em>Git</em> tab and the normal <em>Files</em> tab listing the files that had been created in the remote repository.</p>
-<p>You’ll note that there is one new file <code>training-test.Rproj</code>, and three files that we created earlier on GitHub (<code>.gitignore</code>, <code>LICENSE</code>, and <code>README.md</code>).</p>
-<p>In the <em>Git</em> tab, you’ll note that two files are listed. This is the status pane that shows the current modification status of all of the files in the repository. In this case, the <code>.gitignore</code> file is listed as <em>M</em> for Modified, and <code>training-test.Rproj</code> is listed with a <em>? ?</em> to indicate that the file is untracked. This means that git has not stored any versions of this file, and knows nothing about the file. As you make version control decisions in RStudio, these icons will change to reflect the current version status of each of the files.</p>
+<p>You’ll note that there is one new file <code>genome-analysis.Rproj</code>, and three files that we created earlier on GitHub (<code>.gitignore</code>, <code>LICENSE</code>, and <code>README.md</code>).</p>
+<p>In the <em>Git</em> tab, you’ll note that two files are listed. This is the status pane that shows the current modification status of all of the files in the repository. In this case, the <code>.gitignore</code> file is listed as <em>M</em> for Modified, and <code>genome-analysis.Rproj</code> is listed with a <em>? ?</em> to indicate that the file is untracked. This means that git has not stored any versions of this file, and knows nothing about the file. As you make version control decisions in RStudio, these icons will change to reflect the current version status of each of the files.</p>
 <p><strong>Inspect the history.</strong> For now, let’s click on the <em>History</em> button in the Git tab, which will show the log of changes that occurred, and will be identical to what we viewed on GitHub. By clicking on each row of the history, you can see exactly what was added and changed in each of the two commits in this repository.</p>
-<p><strong>Commit a README.md change.</strong> Next let’s make a change to the README.md file in RStudio. Add a new section, with a markdown block like this:</p>
+<p><strong>Move your old course files into this new directory.</strong> Put your .html files into the main directory and delete the html folder.</p>
+<p><strong>Add, Commit and Push the changes (new files) to the Github repo.</strong> First check the files you want to add. Then click Commit. Write a message to describe the changes (see below on good commit messages.). The Push the changes to the Github repo. Examine the changes in the repo.</p>
 </div>
 <div id="on-good-commit-messages" class="section level3">
 <h3>On good commit messages</h3>
@@ -593,7 +595,7 @@ But this is all super abstract, so let’s explore with some real examples.</p>
 </div>
 <div id="github-web-pages" class="section level3">
 <h3>Github web pages</h3>
-<p>You can enable Github pages to create a web presence for your project. Under the settings tab enable Github pages. You can put the web files in the main directory or rename your “html” folder “docs” and put them there. It takes about 10 min for the web site to appear. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).</p>
+<p>You can enable Github pages to create a web presence for your project. Under the settings tab enable Github pages. It takes about 10 min for the web site to appear. The default web pages in the README.md file, but if you create and upload an index.html page (from a index.Rmd file) this will be your new default. This provides a way to see the html files in your browser as you intended them to appear (not just the html code).</p>
 </div>
 <div id="collaboration-and-conflict-free-workflowswe-walk-talk-more-about-this-later-in-the-class" class="section level3">
 <h3>Collaboration and conflict free workflows(we walk talk more about this later in the class)</h3>
@@ -715,8 +717,32 @@ Application written in R [@RCoreTeam] using the Shiny framework [@Chang2015].
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p>For this lab you will need to create a Github repo and website. The web site should have links to your labs 3-6 and include at least one reference.</p>
-<p>To complete the assignment on Moodel paste your Github URL into the text box.</p>
+<p>For this lab you will need to create a Github repo and website. The web site should have links to your labs 3-6 and include at least one reference. To complete the assignment on Moodel paste your Github URL into the text box.</p>
+<p>Here is an outline of the steps you should go through today.</p>
+<ol style="list-style-type: decimal">
+<li>Download git to your computer</li>
+<li>Create a personal Github account</li>
+<li>Create a Github repository “genome-analysis”</li>
+<li>In your working directory create a project file and paste the URL from the Github repo clone button into the appropriate box</li>
+<li>Move your course files into the genome-analysis directory. Move your .html files from the html folder to the main directory. Delete the html folder.</li>
+<li>Add, Commit and Push these changes and files to the Github repo.</li>
+<li>Create a .Rmd file and name it index.Rmd. The knit version index.html will be your web page.</li>
+<li>In the index.Rmd file add links to the .html files for lab reports 3-6.</li>
+<li>Create a bibiography file and put it in your data folder. Add the line to your YAML block at the beginning of your index.Rmd file.</li>
+</ol>
+<pre><code>title: &quot;Human Genome Analysis&quot;
+author: &quot;Jeffrey Blanchard&quot;
+date: &quot;2/26/2020&quot;
+output: html_document
+bibliography: data/bibliography.bib</code></pre>
+<ol start="10" style="list-style-type: decimal">
+<li>Add a reference to your index.Rmd file. Don’t forget to include the # REFERENCE block at the end of the file.</li>
+<li>Knit your index.Rmd file. Test the resulting .html file to make sure the links work.</li>
+<li>Embellish the index file (web page) with your own personal touches!</li>
+<li>Add, Commit and Push these changes and files to the Github repo.</li>
+<li>Check your Github page to make sure all is well.</li>
+<li>Paste your Github page link into the Moodle Assignment page.</li>
+</ol>
 </div>
 
 
