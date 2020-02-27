@@ -322,7 +322,7 @@ and longer tutorials that cover additional topics:
 * [Happy Git and Github for the useR](https://happygitwithr.com/)
 * [Try Git](https://try.github.io) a great interactive tutorial
 * Software Carpentry [Version Control with Git](http://swcarpentry.github.io/git-novice/)
-
+* [How to create a simple website with RMarkdown](https://nceas.github.io/training-rmarkdown-website/tutorial.html)
 
 ## Adding references to your report
 
@@ -417,7 +417,7 @@ title: "Human Genome Analysis"
 author: "Jeffrey Blanchard"
 date: "2/26/2020"
 output: html_document
-bibliography: data/bibliography.bib
+bibliography: data/references.bib
 ```
   
 10. Add a reference to your index.Rmd file. Don't forget to include the # REFERENCE block at the end of the file.
