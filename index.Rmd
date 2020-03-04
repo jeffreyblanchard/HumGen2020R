@@ -22,7 +22,7 @@ This is an html rendering of the repository (https://github.com/jeffreyblanchard
 
 ### RNA-seq Analysis
 
-* 7 : Data Preprocessing and Normalization
+* 7 : [Data Preprocessing and Normalization](Lab7_HuGen_2020.html)
 * 8 : Data Exploration
 * 9 : Differential Expression
 * 10 : Genome Visualization
