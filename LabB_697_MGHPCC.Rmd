@@ -1,0 +1,46 @@
+---
+title: "697 Lab : Working on the Command Line"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: united
+    highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+## Learning objectives
+
+- How to access high performance computers
+
+### Why HPC
+
+Early steps in genome data processing, particularly assembly and read mapping are computational intensive. Even with a modest data set of a few dozen samples it is difficult/impossible to do on your lap. And who wants to bog down there or another computer for long periods of time (only to run out of memory). There are several options available for using high performance computers at minimal or no cost.
+
+### MGHPCC Access
+
+As MGHPCC is for research computing, only Principal Investigators (PIs) as defined by the local school and their staff or authorized collaborators may receive accounts on MGHPCC. PI authorization is required for all new account requests. You can easily [request access](https://www.umassrc.org/hpc/index.php) if you meet the requirements. If you are in this class and are not part of an active research group you can list me as the PI and I will add you to our lab account for the purpose of this class.
+
+### Using the lessons with Amazon Web Services (AWS)
+
+The Data Carpentry Genomic lessons are designed to be run on pre-imaged Amazon Web Services (AWS) instances. With the exception of a spreadsheet program, all of the software and data used in their genomic workshop are hosted on an Amazon Machine Image (AMI). To work on this lessons independently outside of a Data Carpentry workshop, you will need to start your own AMI instance. Follow [these instructions](https://datacarpentry.org/genomics-workshop/AMI-setup/) on creating an Amazon instance. Use the AMI __ami-0985860a69ae4cb3d__ (Data Carpentry Genomics Beta 2.0 (April 2019)) listed on the Community AMIs page. Please note that you must set your location as __N. Virginia__ in order to access this community AMI. You can change your location in the upper right corner of the main AWS menu bar. The cost of using this AMI for a few days, with the t2.medium instance type is very low (about USD $1.50 per user, per day).
+
+### Galaxy Cloud and Jet Stream
+
+https://galaxyproject.org/use/
+
+### Jet Stream
+
+Jetstream is part of XSEDE, a collection of integrated advanced digital resources and services funded by NSF. You need to be eligible for an XSEDE allocation to use Jetstream, which means must be based at a U.S. institution. And although XSEDE is NSF-funded, "projects need not be supported by NSF grants" to receive an allocation. Jetstream enables researchers to launch, use, and shutdown their own Galaxy servers that have been pre-configured similar to the Main Galaxy server. If you want to further customize your launched server you can become an administrator and even access the server from the shell. 
+
+
+### National Center for Genome Analysis Support (NCGAS)
+
+The mission of the National Center for Genome Analysis Support is to enable the biological research community of the US to analyze, understand, and make use of the vast amount of genomic information now available. NCGAS focuses particularly on transcriptome- and genome-level assembly, phylogenetics, metagenomics/transcriptomics, and community genomics
+
+
+### Setting it up on a local computer
+
+
+

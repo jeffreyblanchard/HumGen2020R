@@ -1,0 +1,77 @@
+---
+title: "Human Genome Analysis Lab 7 : RNA-Seq workflow: gene-level exploratory analysis and differential expression"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    theme: united
+    highlight: tango
+---
+
+## Learning Objectives
+
+* Understand the basic workflow for RNAseq
+* Data normalization using DESeq
+* Data exploration using PCA, PCO and MDS
+
+## Background
+
+In class we will discuss this [Galaxy workflow](https://galaxyproject.org/tutorials/rb_rnaseq/) with good background information
+
+## Bioconductor
+
+Bioconductor is an open source, open development software project for genomic data analysis. It is based primarily on the R programming language.  There are nearly 1,000 R software packages available and an active user community. R/Bioconductor is one of the primary mechanisms for publishing new genomic data analysis tools. We will use numerous Bioconductor packages in this course.  Bioconductor is also available for cloud computing on Amazon and other platforms.  
+
+You can install Bioconductor by typing in the R console 
+
+```{r eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(version = "3.10")
+```
+
+Individual packages that are not part of the BioConductor core can be installed using
+
+```{r eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(name_of_package)
+```
+
+## Introduction to a RNA-Seq differential expression workflow
+
+This lab will walk you through an end-to-end RNA-Seq differential expression workflow, using DESeq2 along with other Bioconductor packages. 
+
+The data used in this workflow is an RNA-Seq experiment of airway smooth muscle cells treated with dexamethasone, a synthetic glucocorticoid steroid with anti-inflammatory effects. Glucocorticoids are used, for example, in asthma patients to prevent or reduce inflammation of the airways. In the experiment, four primary human airway smooth muscle cell lines were treated with 1 micromolar dexamethasone for 18 hours. For each of the four cell lines, we have a treated and an untreated sample. The reference for the experiment is:
+
+Himes BE, Jiang X, Wagner P, Hu R, Wang Q, Klanderman B, Whitaker RM, Duan Q, Lasky-Su J, Nikolos C, Jester W, Johnson M, Panettieri R Jr, Tantisira KG, Weiss ST, Lu Q. "RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells." PLoS One. 2014 Jun 13;9(6):e99625. PMID: 24926665. GEO: GSE52778.
+
+To install the packages and data needed to complete this tutorial on your computer
+
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("rnaseqGene")
+
+# I also needed to install the following on my computer 
+# (You will realize this if you get an error message that the corresponding library will not load)
+
+BiocManager::install("airway")
+BiocManager::install("tximeta")
+BiocManager::install("DESeq2")
+BiocManager::install("Gviz")
+BiocManager::install("sva")
+BiocManager::install("RUVSeq")
+BiocManager::install("fission")
+```
+
+We will go step wise through a Bioconductor workflow vignette [RNA-seq workflow: gene-level exploratory analysis and differential expression](https://master.bioconductor.org/packages/release/workflows/html/rnaseqGene.html). We will start by opening the html file associated with the workflow and downloading the R script to our computer. 
+
+Today we will cover the first 4 sections (through "Exploratory analysis and visualization")
+
+
+## Exercises
+
+Transform the R script that is part of the vignette into a .Rmd file and submit the knitted html file.
