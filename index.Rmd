@@ -24,7 +24,7 @@ This is an html rendering of the repository (https://github.com/jeffreyblanchard
 
 * 7 : [Data Preprocessing and Normalization](Lab7_HuGen_2020.html)
 * 8 : Data Exploration
-* 9 : Differential Expression
+* 9 : Differential Expression and Box Plots
 * 10 : Genome Visualization
 * 11 : Gene Ontology Analysis
 * 12 : Network Analysis
