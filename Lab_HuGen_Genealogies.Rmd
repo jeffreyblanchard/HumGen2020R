@@ -14,7 +14,7 @@ output:
 * Learn to use online Genealogy resources
 * Construct a genealogy of yourself or someone you know 
 
-# Overview - Genetic vs genealogical ancestors
+# Genetic vs genealogical ancestors
 
 The chart below shows a family tree radiating out from one individual. Each successive layer out shows an individual’s ancestors another generation back in time, parents, grandparents, great-grandparents and so on back (magenta for female, blue for male).
 
