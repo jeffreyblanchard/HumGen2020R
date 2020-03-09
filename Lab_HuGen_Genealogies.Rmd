@@ -190,7 +190,7 @@ GEDCOM (GEnealogical Data COMmunications) is a data structure created for storin
 
 GEDcom import/export instructions
 
-* <a href="https://support.ancestry.com/s/question/0D515000025jkMVCAY/downloading-a-ged-file" target="_blank">Ancestry GEDcom Import/Export</a>
+* <a href="https://support.ancestry.com/s/article/Uploading-and-Downloading-Trees" target="_blank">Ancestry GEDcom Import/Export</a>
 * <a href="http://www.myheritage.com/help-center#/path/951685261" target="_blank">MyHeritage GEDcom Import/Export</a>
 
 ## Acknowledgements
