@@ -152,7 +152,7 @@ You can read more about DNA matching on Ancestry https://www.ancestry.com/dna/re
 
 <img src="images/23andMe_DNA_matches.png" alt="Drawing"/>
 
-23andMe does not have a geneaology service, so there is no matching based on trees the user has created. However, it does have features not included on the Ancestry site like a chromosome browser to visual the position of the shared matches. Below is a son in relationship to his parents. Not surprising he inherited his X chromosome from his mother.
+Until recently 23andMe did not have a geneaology service (see below for the beta software)  However, it does have features not included on the Ancestry site like a chromosome browser to visual the position of the shared matches. Below is a son in relationship to his parents. Not surprising he inherited his X chromosome from his mother.
 
 <img src="images/23andMe_parents.png" alt="Drawing"/>
 
