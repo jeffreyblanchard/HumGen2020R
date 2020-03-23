@@ -23,18 +23,31 @@ This is an html rendering of the repository (https://github.com/jeffreyblanchard
 ### RNA-seq Analysis
 
 * 7 : [Data Preprocessing and Normalization](Lab7_HuGen_2020.html)
-* 8 : Data Exploration
-* 9 : Differential Expression and Box Plots
-* 10 : Genome Visualization
-* 11 : Gene Ontology Analysis
-* 12 : Network Analysis
+* i : Data Exploration
+* ii : Differential Expression and Box Plots
+* iii : Genome Visualization
+* iv : Gene Ontology Analysis
+* v : Network Analysis
 
-### Students taking 697 version will be expected to complete these following additional labs
+### Genealogies
+
+* 8 : [Genealogical Trees](Lab8_HuGen.html)
+
+### SARS-CoV-2 reporting and genome analysis
+
+* 9 : Working with the SARS-CoV-2 data from GitHub and R Shiny Apps
+* 10 : Geographical mapping SARS-CoV-2 data
+* 11 : Genome mapping of SARS-CoV-2 variants
+* 12 : Phylogenetic and Network Analysis of SARS-CoV-2
+
+
+
+### Students taking 697 will be expected to complete these following additional labs
 
 * 13 : [Project Organization and Management](https://datacarpentry.org/organization-genomics/01-tidiness/index.html)
 * 14 : [The Command Line](LabA_697_command_line.html)
-* 15 : Working on the MGPCC computers
-* 16 : Assessing Read Quality
-* 17 : Trimming and Filtering
-* 18 : Read Mapping - Variant Calling Workflow
+* 15 : [Accessing High Performance Computers](LabB_697_MGHPCC.html)
+* 16 : [Assessing Read Quality](LabC_697_SNP_mapping.html)
+* 17 : [Trimming and Filtering](LabC_697_SNP_mapping.html)
+* 18 : [Read Mapping - Variant Calling Workflow](LabC_697_SNP_mapping.html)
 * 19 : Read Mapping - Transcript Counts Workflow
