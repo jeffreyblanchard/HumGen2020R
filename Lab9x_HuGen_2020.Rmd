@@ -1,0 +1,49 @@
+---
+title: "Human Genome Analysis Lab 9x : SARS-Cov-2"
+output:
+  html_document:
+    toc: true
+    toc_depth : 4
+    theme: united
+    highlight: tango
+---
+
+## Learning Objectives
+
+* How to make a R shiny app or how to map to a map
+
+## Introduction to the data sets and the JHU 
+
+### Reported vs Unreported cases
+
+[Github repo for Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE](https://github.com/CSSEGISandData/COVID-19)
+
+[Map Visualization of COVID-19 Across the World with R](https://www.r-bloggers.com/map-visualization-of-covid-19-across-the-world-with-r/)
+
+[COVID-19 epidemiology with R](https://rviews.rstudio.com/2020/03/05/covid-19-epidemiology-with-r/)
+
+https://github.com/RamiKrispin/coronavirus
+
+
+https://github.com/RamiKrispin/coronavirus-csv/blob/master/coronavirus_dataset.csv
+
+
+### Cloning data from JH
+
+In this case we are not going to fork the project, because we are only going to Pull data from the site when new data is available.  
+
+we wanted to create a fork we would 
+
+Note that we can pull but can't push.
+
+Do over the structure of the data
+
+As long as we do
+
+## Tidying and Wrangling
+
+# Exercises
+
+Bar graph with top 20 countries as of last class.
+Bar graph with top 20 countriles as of today
+Time series with China, Korea, Japan, Italy and US and your country of 
