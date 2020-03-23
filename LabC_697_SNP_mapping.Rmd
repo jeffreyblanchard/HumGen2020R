@@ -1,0 +1,41 @@
+---
+title: "697 LabC : Data Wrangling and Processing for Genomics"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    theme: united
+    highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+## Learning objectives
+
+* Assessing Read Quality
+* Trimming and Filtering quality standards
+* SNP Variant Callings
+
+## Introduction
+
+This lab follows the Data Carpentry's [Data Wrangling and Processing for Genomics](https://datacarpentry.org/wrangling-genomics/). Arianna Kazemi has tested it on the MGPHCC. She had the following issues.
+
+1. It took a long time to down the genome files using curl.  If you are having trouble downloading the E.coli genome files. You can download them from here, unzip the folder and then use __scp__ to transfer them to your MGHPC https://drive.google.com/file/d/1UYj7H05p5AtkCCxlmalE-et0MMOlAJ58/view?usp=sharing . See the See the MGHPCC [wiki](http://wiki.umassrc.org/wiki/index.php/Main_Page) for __scp__  instructions
+
+2. When running trimmomatic, since you need the path to the jar file and because the path the workshop supplies to the adapter files doesn't work. These commands worked on MGHPCC
+* Getting the adapter file:
+```{r, eval=FALSE}
+cp /share/pkg/trimmomatic/0.32/adapters/NexteraPE-PE.fa
+```
+* Running trimmomatic:
+```{r, eval=FALSE}
+java -jar -Xmx512m /share/pkg/trimmomatic/0.32/trimmomatic-0.32.ja
+```
+
+3. Download IGV to your own computer. I tried to use it on the MGHPCC but have run into memory issues.
+
+## Exercises
+
+* Comming
+
+

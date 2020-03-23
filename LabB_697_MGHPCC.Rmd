@@ -48,4 +48,6 @@ The mission of the [National Center for Genome Analysis Support](https://ncgas.o
 
 I don't recommend setting up your computer to do these analyses. However, if your lab has a Unix computer with more CPUs than it work fine. We were able to run this tutorial on our lab computer.
 
+## Exercises
 
+There are no exercises for this Lab but you need to be able to login into MGHPCC and use unix commands in the terminal.
