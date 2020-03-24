@@ -36,6 +36,6 @@ java -jar -Xmx512m /share/pkg/trimmomatic/0.32/trimmomatic-0.32.ja
 
 ## Exercises
 
-* Comming
+For now work through the pipeline so that you have data that can be visualized in IGV.
 
 
