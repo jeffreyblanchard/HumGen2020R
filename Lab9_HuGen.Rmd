@@ -1,0 +1,298 @@
+---
+title: "Human Genome Analysis Lab 9 : Working with COVID-19 reporting data"
+output:
+  html_document:
+    toc: true
+    toc_depth : 4
+    theme: united
+    highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+*I recognize, and fully understand, that this data maybe emotionally difficult to work. My intention is to make these lab relevant, allowing you to gather your own insights directly from new visualizations of the data. Please let me know if you would rather not work with the data.*
+
+## Learning Objectives
+
+* Understanding the sources of SARS-CoV-2 incidence reports
+* Accessing data remotely
+* Learn the difference between wide and long table formats
+* Mapping data using latitude and longitude coordinates
+
+## Visualizing COVID-19 cases, deaths and recoveries
+
+The virus has been recently renamed based on phylogenetic analysis (more on this next week) severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). The disease caused by the virus is coronavirus disease (COVID-19). In this lab we will work with reporting data on COVID-19 cases, deaths and recoveries. 
+
+### Introduction to JHU case tracking data
+
+Researchers (Ensheng Dong, Hongru Du, Lauren Gardner) at John Hopkins University developed an [interactive dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) to visual data and track reported cases of coronavirus disease 2019 (SARS-CoV-2) in real time. The underlying data is collated from the following sources and updated several times a day.
+
+[World Health Organization (WHO)](https://www.who.int/) 
+ | [DXY.cn. Pneumonia. 2020](http://3g.dxy.cn/newh5/view/pneumonia) 
+ | [BNO News](https://bnonews.com/index.php/2020/02/the-latest-coronavirus-cases/)
+ | [National Health Commission of the People’s Republic of China (NHC)](http://www.nhc.gov.cn/xcs/yqtb/list_gzbd.shtml) 
+ | [China CDC (CCDC)](http://weekly.chinacdc.cn/news/TrackingtheEpidemic.htm)
+ | [Hong Kong Department of Health](https://www.chp.gov.hk/en/features/102465.html)
+ | [Macau Government](https://www.ssm.gov.mo/portal/)
+ | [Taiwan CDC](https://sites.google.com/cdc.gov.tw/2019ncov/taiwan?authuser=0)
+ | [US CDC](https://www.cdc.gov/coronavirus/2019-ncov/index.html)
+ | [Government of Canada](https://www.canada.ca/en/public-health/services/diseases/coronavirus.html) 
+ | [Australia Government Department of Health](https://www.health.gov.au/news/coronavirus-update-at-a-glance) 
+ | [European Centre for Disease Prevention and Control (ECDC)](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases) 
+ | [Ministry of Health Singapore (MOH)](https://www.moh.gov.sg/covid-19)
+ | [Italy Ministry of Health](http://www.salute.gov.it/nuovocoronavirus)
+ | [1Point3Arces](https://coronavirus.1point3acres.com/en)
+ | [WorldoMeters](https://www.worldometers.info/coronavirus/)
+
+* It is important to understand that this data is only as accurate as the reporting and many cases of the disease go unreported because of a lack of testing. This some countries may have have confirmed cases because of more comprehensive testing. Thus, the reporting data represent a minimum number of cases. See recent posts and an article by UMass statistian [Prof. Nick Reich](https://twitter.com/reichlab)
+
+### JHU's Github repo
+
+JHU researchers make data that goes into the [dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) available on [Github repo for Novel Coronavirus (COVID-19) Cases](https://github.com/CSSEGISandData/COVID-19). In this lab we will work with this data. 
+
+You could start by creating a new Rproj and cloning the JHU repo as you did in Lab 6. However, we will not need all this data and it is easier to access the individual files directly as some are updated daily 
+
+Let's take a look at the files and the structure of data in the files.
+
+* csse_covid_19_data
+  + csse_covid_19_daily_reports
+    - 03-11-2020.csv
+    
+Open up the file to look at the structure 
+    
+The file contains the columns 
+
+Province/State 	Country/Region 	Last Update 	Confirmed 	Deaths 	Recovered 	Latitude 	Longitude
+
+It is important to note that for some countries there is only one row, while for others (e.g. China and US) there are multiple rows representing different provinces or states. Thus, we will need to sum these rows to get a total count for the US and China when we make graphs. From experience in making this tutorial I know the Column names with __/__ will cause errors in ggplot (). 
+
+Next look at the time series data which is a complilation of the daily reports for each reporting type (Confirmed, Deaths, Recovered)
+
+* csse_covid_19_data
+  + csse_covid_19_time_series
+    - time_series_covid19_confirmed_global.csv
+
+Province/State 	Country/Region 	Lat 	Long 	1/22/20 	1/23/20 	1/24/20...
+      
+This data is what is called wide format, where values of the variable being observed (Confirmed cases) are spread out across columns (Here: columns for each day). Another way of describing this is that there is more than one measurement per row. This wide format works well for data entry and sometimes works well for analysis but can be cumbersome when using R. The __tidyr__ package allows us to quickly switch between wide format and what is called long format where there is only 1 column for the cases.
+
+### Making a graphs from the daily reports
+
+However, we are going to work with the data using __tidyverse__ functions and use a the library __lubridate__ for reformatting the dates
+
+```{r, message=FALSE}
+library(tidyverse)
+library(lubridate)
+```
+                 
+Let's start by plotting data from our last class on 3/11/2020 (the file looked at above). We can read data directly from the Github site. 
+
+```{r, message=FALSE}
+report_03_11_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-11-2020.csv")) %>%
+  rename(Country.Region = "Country/Region", Province.State = "Province/State")
+```
+
+Check the table properties to make sure the data imported as we expected
+
+```{r}
+head(report_03_11_2020)
+str(report_03_11_2020)
+```
+
+Let's start with a plot of confirmed cases in US states as of March 11th.
+
+```{r, fig.height=10}
+report_03_11_2020 %>% 
+  filter (Country.Region == "US") %>% 
+  ggplot(aes(x = Confirmed,  y = reorder(Province.State, Confirmed))) + 
+    geom_point() +
+    ggtitle("Confirmed cases for each US State") +
+    ylab("Country/Region") +
+    xlab("Confirmed Cases")
+```
+
+If we try to graph by Country.Region there are entries that have the same character (e.g. China and US) so we need to summarise the data we are interested in graphing
+
+```{r}
+report_03_11_2020 %>% 
+  group_by(Country.Region) %>% 
+  summarise(Deaths = sum(Deaths)) %>% 
+  arrange(desc(Deaths))
+```
+
+There are 116 countries which are a lot to put on a single graph, so let's just start with the countries with the most cases. In past labs we have only made bar graphs from histogram data, but values can be used where height of the bar will represent the value in a column of the data frame. This is done by using stat="identity" instead of the default, stat="bin".
+
+```{r}
+report_03_11_2020 %>% 
+  group_by(Country.Region) %>% 
+  summarise(Deaths = sum(Deaths)) %>% 
+  arrange(desc(Deaths)) %>% 
+  slice(1:20) %>% 
+  ggplot(aes(x = Deaths,  y = reorder(Country.Region, Deaths))) + 
+    geom_bar(stat = 'identity') +
+    ggtitle("The 20 countries with the most reported COV19-related deaths") +
+    ylab("Country/Region") +
+    xlab("Deaths")
+```
+
+### Working with the time series data
+
+Start by loading the most recent times series data for confirmed cases
+
+```{r, message=FALSE}
+time_series_confirmed <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
+  rename(Province.State = "Province/State", Country.Region = "Country/Region")
+```
+
+Check the table properties to make sure the data imported as we expected
+
+```{r}
+head(time_series_confirmed)
+```
+
+As noted above this data is in wide format. To convert to long format
+
+```{r}
+time_series_confirmed_long <- time_series_confirmed %>% 
+               pivot_longer(-c(Province.State, Country.Region, Lat, Long),
+                            names_to = "Date", values_to = "Confirmed") %>% 
+               group_by(Country.Region,Date) %>% 
+               summarise(Confirmed = sum(Confirmed))
+
+# convert date to data format
+time_series_confirmed_long$Date <- mdy(time_series_confirmed_long$Date)
+# Thanks to Prof. Chris Sunderland for this code chunk
+```
+
+Let's look at the format of the data frame (tibble) now
+
+```{r}
+head(time_series_confirmed_long)
+```
+
+Now a graph of 
+
+```{r}
+time_series_confirmed_long %>% 
+  filter (Country.Region == "US") %>% 
+    ggplot(aes(x = Date,  y = Confirmed)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("US Confirmed COVID-19 Cases")
+```
+
+Let's add in a few other countries
+
+```{r}
+time_series_confirmed_long %>% 
+  filter (Country.Region %in% c("China","Japan", "Korea, South",
+                                "Italy","Spain", "US")) %>% 
+    ggplot(aes(x = Date,  y = Confirmed)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("Confirmed COVID-19 Cases") +
+    facet_wrap(~Country.Region, ncol=2, scales="free_y")
+```
+
+Now several countries on the same graph
+
+```{r}
+time_series_confirmed_long %>% 
+  filter (Country.Region %in% c("China","France","Italy", 
+                                "Korea, South", "US")) %>% 
+    ggplot(aes(x = Date,  y = Confirmed, color = Country.Region)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("Confirmed COVID-19 Cases")
+```
+
+### Visualizing data on maps
+
+Here are two examples provided by Prof. Chris Sunderland and Anisa Dhana
+
+#### Adaptation of a post from Anisa Dhana on [R-Bloggers](https://www.r-bloggers.com/map-visualization-of-covid-19-across-the-world-with-r/) 
+
+* This code uses data is in wide format from the above times series.
+
+Load the additional libraries (and install if necessary)
+
+```{r, message=FALSE}
+library(maps)
+library(viridis)
+```
+
+Get the world map
+```{r}
+world <- map_data("world")
+```
+
+Cutoffs based on the number of cases
+```{r}
+mybreaks <- c(1, 20, 100, 1000, 50000)
+```
+
+Plot of data from March 11
+
+```{r, warnings=FALSE}
+ggplot() +
+  geom_polygon(data = world, aes(x=long, y = lat, group = group), fill="grey", alpha=0.3) +
+  geom_point(data=time_series_confirmed, aes(x=Long, y=Lat, size=`2/25/20`, color=`2/25/20`),stroke=F, alpha=0.7) +
+  scale_size_continuous(name="Cases", trans="log", range=c(1,7),breaks=mybreaks, labels = c("1-19", "20-99", "100-999", "1,000-49,999", "50,000+")) +
+  # scale_alpha_continuous(name="Cases", trans="log", range=c(0.1, 0.9),breaks=mybreaks) +
+  scale_color_viridis_c(option="inferno",name="Cases", trans="log",breaks=mybreaks, labels = c("1-19", "20-99", "100-999", "1,000-49,999", "50,000+")) +
+  theme_void() + 
+  guides( colour = guide_legend()) +
+  labs(caption = "") +
+  theme(
+    legend.position = "bottom",
+    text = element_text(color = "#22211d"),
+    plot.background = element_rect(fill = "#ffffff", color = NA), 
+    panel.background = element_rect(fill = "#ffffff", color = NA), 
+    legend.background = element_rect(fill = "#ffffff", color = NA)
+  )
+```
+
+#### Adaptation of code from Prof. Chris Sunderland
+
+Get data, pivot to longer format and summarize
+```{r, messages=FALSE}
+time_series_confirmed_long2 <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
+    rename(Province.State = "Province/State", Country.Region = "Country/Region") %>%
+    pivot_longer(-c(Province.State, Country.Region, Lat, Long),
+    names_to = "Date", values_to = "cumulative_cases") %>%
+    mutate(Date = mdy(Date) - days(1),
+        Place = paste(Lat,Long,sep="_")) %>%
+    group_by(Place,Date) %>%
+        summarise(cumulative_cases = ifelse(sum(cumulative_cases)>0,
+        sum(cumulative_cases),NA_real_),
+        Lat = mean(Lat),
+        Long = mean(Long)) %>%
+    mutate(Pandemic_day = as.numeric(Date - min(Date)))
+```
+
+View the table
+```{r}
+head(time_series_confirmed_long2)
+```
+
+Plot the data
+```{r, warnings=FALSE}
+static <- ggplot(subset(time_series_confirmed_long2,Date %in% seq(min(Date),max(Date),7)),
+            aes(x = Long, y = Lat, size = cumulative_cases/1000)) +
+            borders("world", colour = NA, fill = "grey90") +
+            theme_bw() +
+            geom_point(shape = 21, color='purple', fill='purple', alpha = 0.5) +
+            labs(title = 'COVID-19 spread',x = '', y = '',
+                 size="Cases (x1000))") +
+            theme(legend.position = "right") +
+            coord_fixed(ratio=1)+
+            facet_wrap(.~Date,nrow=3)
+static
+```
+
+# Exercises
+
+Create at least 2 new graphs (different from the ones above) each from the categories of daily reports, time series and geographical maps that best convey aspects of the pandemic relevant to you.
+
+Submit this exercise as a link from your Github page (Submit your Github website URL in Moodle).
+
