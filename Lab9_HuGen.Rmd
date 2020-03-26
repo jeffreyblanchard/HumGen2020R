@@ -108,7 +108,7 @@ report_03_11_2020 %>%
   filter (Country_Region == "US") %>% 
   ggplot(aes(x = Confirmed,  y = reorder(Province_State, Confirmed))) + 
     geom_point() +
-    ggtitle("Confirmed cases for each US State") +
+    ggtitle("Confirmed cases for each US State - March 11, 2020") +
     ylab("Country/Region") +
     xlab("Confirmed Cases")
 ```
@@ -132,7 +132,7 @@ report_03_11_2020 %>%
   slice(1:20) %>% 
   ggplot(aes(x = Deaths,  y = reorder(Country_Region, Deaths))) + 
     geom_bar(stat = 'identity') +
-    ggtitle("The 20 countries with the most reported COV19-related deaths") +
+    ggtitle("The 20 countries with the most reported COV19-related deaths - March 11, 2020") +
     ylab("Country/Region") +
     xlab("Deaths")
 ```
