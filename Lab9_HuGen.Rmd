@@ -229,8 +229,7 @@ Now to join the tables. A __full_join__ which means that the keys that are commo
 
 ```{r}
 time_series_long_joined <- full_join(time_series_confirmed_long,
-              time_series_deaths_long, by = c("Key")) %>% 
-    select(-Key)
+              time_series_deaths_long, by = c("Key"))
 head(time_series_long_joined)
 ```
 
@@ -241,20 +240,56 @@ which(is.na(time_series_long_joined$Confirmed))
 which(is.na(time_series_long_joined$Deaths))
 ```
 
-There are no values so we are in good shape to proceed to using this table for graphing, but first reformat Date
+There are no NA values.
+
+Following the same set of steps to add the Recovered Data
+
+```{r, message=FALSE}
+### download the file
+time_series_recovered <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")) %>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region")
+
+### convert to long format
+time_series_recovered_long <- time_series_recovered %>% 
+  pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+               names_to = "Date", values_to = "Recovered")
+
+### Create the Key
+time_series_recovered_long <- time_series_recovered_long %>% 
+  unite(Key, Province_State, Country_Region, Date, sep = ".") %>% 
+  select(Key, Recovered)
+
+### Merge with prior table (only this time will delete the Key column
+### because we have no further use for it)
+time_series_long_joined <- full_join(time_series_long_joined,
+              time_series_recovered_long, by = c("Key")) %>% 
+    select(-Key)
+head(time_series_long_joined)
+```
+
+Now we are in good shape to proceed to using these table for graphing, but first reformat Date
 
 ```{r}
 time_series_long_joined$Date <- mdy(time_series_long_joined$Date)
 ```
 
-#### Make Graphs from the time series data
+Confirmed, Deaths and Recovered are all count data, and there may be times when we want to plot all three on the same graph. There are multiple ways to accomplish this and one is through creating a column will all 3 using _pivot_long
+
+```{r}
+time_series_long_joined_counts <- time_series_long_joined %>% 
+  pivot_longer(-c(Province_State, Country_Region, Lat, Long, Date),
+               names_to = "Report_Type", values_to = "Counts")
+head(time_series_long_joined_counts)
+```
+
+#### Making Graphs from the time series data
 
 To make a times series graph of the confirmed cases we need to summarize the Country date to count up the individual state data for the US. 
 
 ```{r}
 time_series_long_joined %>% 
   group_by(Country_Region,Date) %>% 
-  summarise(Confirmed = sum(Confirmed)) %>% 
+  summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
   filter (Country_Region == "US") %>% 
     ggplot(aes(x = Date,  y = Confirmed)) + 
     geom_point() +
@@ -262,12 +297,12 @@ time_series_long_joined %>%
     ggtitle("US Confirmed COVID-19 Cases")
 ```
 
-Let's add in a few other countries
+Let's look at the US data in the context of a few other countries
 
 ```{r}
 time_series_long_joined %>% 
   group_by(Country_Region,Date) %>% 
-  summarise(Confirmed = sum(Confirmed)) %>% 
+  summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
   filter (Country_Region %in% c("China","Japan", "Korea, South",
                                 "Italy","Spain", "US")) %>% 
     ggplot(aes(x = Date,  y = Confirmed)) + 
@@ -282,13 +317,26 @@ Now several countries on the same graph
 ```{r}
 time_series_long_joined %>% 
     group_by(Country_Region,Date) %>% 
-    summarise(Confirmed= sum(Confirmed)) %>% 
+    summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
     filter (Country_Region %in% c("China","France","Italy", 
-                                "Korea, South", "Spain", "US")) %>% 
+                                "Korea, South", "US")) %>% 
     ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
     geom_point() +
     geom_line() +
-    ggtitle("COVID-19 Deaths")
+    ggtitle("Confirmed COVID-19 Cases")
+```
+
+We can use the alternative data frame with column Report_Type to show Confirmed, Deaths and Recovered. Because the counts for Deaths and Recovered are low relative to Confirmed a log scale works best here for seeing the pattern
+
+```{r}
+time_series_long_joined_counts %>% 
+  group_by(Country_Region, Report_Type, Date) %>% 
+  summarise(Counts = sum(Counts)) %>% 
+  filter (Country_Region == "US") %>% 
+    ggplot(aes(x = Date,  y = log2(Counts), fill = Report_Type, color = Report_Type)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("US COVID-19 Cases")
 ```
 
 ### Visualizing data on maps
