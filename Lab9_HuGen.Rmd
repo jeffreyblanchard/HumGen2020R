@@ -78,7 +78,7 @@ This data is what is called wide format, where values of the variable being obse
 
 ### Making a graphs from the daily reports
 
-However, we are going to work with the data using __tidyverse__ functions and use a the library __lubridate__ for reformatting the dates
+We are going to work with the data using __tidyverse__ functions and use a the library __lubridate__ for reformatting the dates
 
 ```{r, message=FALSE}
 library(tidyverse)
@@ -86,6 +86,16 @@ library(lubridate)
 ```
                  
 Let's start by plotting data from our last class on 3/11/2020 (the file looked at above). We can read data directly from the Github site. 
+
+1. Go to the file you want to download.
+2. Click it to view the contents within the GitHub UI.
+3. In the top right, right click the Raw button.
+4. Save as... or copy the url
+
+Below I have used the url so that it will get the most current version. This method also loads the file into directly in R (memory) and doesn't save it on your computer.
+
+time_series_confirmed_long2 <- read_csv(url("https://github.com/CSSEGISandData/COVID-19/blob/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) 
+
 
 ```{r, message=FALSE}
 report_03_11_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-11-2020.csv")) %>%
