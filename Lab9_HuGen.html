@@ -837,7 +837,7 @@ summary {
 </div>
 <div id="visualizing-data-on-maps" class="section level3">
 <h3>Visualizing data on maps</h3>
-<p>Here are two examples provided by Prof. Chris Sunderland and Anisa Dhana</p>
+<p>Here are two examples provided by Prof. Chris Sunderland and Anisa Dhana. They both rely on using the <strong>maps</strong> package. For ideas on how to build on these examples here is a nice tutorial on Maps in R using <a href="https://cran.r-project.org/web/packages/maps/maps.pdf">maps</a> by <a href="http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html">Eric Anderson</a></p>
 <div id="adaptation-of-a-post-from-anisa-dhana-on-r-bloggers" class="section level4">
 <h4>Adaptation of a post from Anisa Dhana on <a href="https://www.r-bloggers.com/map-visualization-of-covid-19-across-the-world-with-r/">R-Bloggers</a></h4>
 <ul>
@@ -850,7 +850,7 @@ summary {
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">world &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;world&quot;</span>)</a></code></pre></div>
 <p>Cutoffs based on the number of cases</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">mybreaks &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">100</span>, <span class="dv">1000</span>, <span class="dv">50000</span>)</a></code></pre></div>
-<p>Plot of data from March 11</p>
+<p>Plot of data from a month ago on Feb 25th</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb46-2" title="2"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> world, <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group), <span class="dt">fill=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">alpha=</span><span class="fl">0.3</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb46-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>time_series_confirmed, <span class="kw">aes</span>(<span class="dt">x=</span>Long, <span class="dt">y=</span>Lat, <span class="dt">size=</span><span class="st">`</span><span class="dt">2/25/20</span><span class="st">`</span>, <span class="dt">color=</span><span class="st">`</span><span class="dt">2/25/20</span><span class="st">`</span>),<span class="dt">stroke=</span>F, <span class="dt">alpha=</span><span class="fl">0.7</span>) <span class="op">+</span></a>
@@ -876,7 +876,7 @@ summary {
 </div>
 <div id="adaptation-of-code-from-prof.-chris-sunderland" class="section level4">
 <h4>Adaptation of code from Prof. Chris Sunderland</h4>
-<p>Get data, pivot to longer format and summarize</p>
+<p>Get data, pivot to longer format, mutate and summarize</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">time_series_confirmed_long2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv&quot;</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb50-2" title="2"><span class="st">    </span><span class="kw">rename</span>(<span class="dt">Province_State =</span> <span class="st">&quot;Province/State&quot;</span>, <span class="dt">Country_Region =</span> <span class="st">&quot;Country/Region&quot;</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb50-3" title="3"><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="op">-</span><span class="kw">c</span>(Province_State, Country_Region, Lat, Long),</a>

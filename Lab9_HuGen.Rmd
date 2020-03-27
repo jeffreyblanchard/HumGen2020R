@@ -341,7 +341,7 @@ time_series_long_joined_counts %>%
 
 ### Visualizing data on maps
 
-Here are two examples provided by Prof. Chris Sunderland and Anisa Dhana
+Here are two examples provided by Prof. Chris Sunderland and Anisa Dhana. They both rely on using the __maps__ package. For ideas on how to build on these examples here is a nice tutorial on Maps in R using [maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
 
 #### Adaptation of a post from Anisa Dhana on [R-Bloggers](https://www.r-bloggers.com/map-visualization-of-covid-19-across-the-world-with-r/) 
 
@@ -364,7 +364,7 @@ Cutoffs based on the number of cases
 mybreaks <- c(1, 20, 100, 1000, 50000)
 ```
 
-Plot of data from March 11
+Plot of data from a month ago on Feb 25th
 
 ```{r, warnings=FALSE}
 ggplot() +
@@ -387,7 +387,8 @@ ggplot() +
 
 #### Adaptation of code from Prof. Chris Sunderland
 
-Get data, pivot to longer format and summarize
+Get data, pivot to longer format, mutate and summarize
+
 ```{r, messages=FALSE}
 time_series_confirmed_long2 <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
     rename(Province_State = "Province/State", Country_Region = "Country/Region") %>%
