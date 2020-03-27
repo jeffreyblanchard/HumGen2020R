@@ -425,7 +425,7 @@ static
 
 # Exercises
 
-Create at least 2 new graphs (different from the ones above) each from the categories of daily reports, time series and geographical maps that best convey aspects of the pandemic relevant to you.
+The above graphs are minimal and meant to provide some starter code. I am sure you can make these richer and with greater impact. Create at least 2 new graphs (different from the ones above) each from the categories of daily reports, time series and geographical maps that best convey aspects of the pandemic relevant to you.
 
 Submit this exercise as a link from your Github page (Submit your Github website URL in Moodle).
 
