@@ -333,6 +333,7 @@ time_series_long_joined_counts %>%
   group_by(Country_Region, Report_Type, Date) %>% 
   summarise(Counts = sum(Counts)) %>% 
   filter (Country_Region == "US") %>% 
+  filter (Report_Type %in% c("Confirmed", "Deaths")) %>% 
     ggplot(aes(x = Date,  y = log2(Counts), fill = Report_Type, color = Report_Type)) + 
     geom_point() +
     geom_line() +
