@@ -1,0 +1,357 @@
+---
+title: "Human Genome Analysis Lab 10 : Working with COVID-19 reporting data  "
+output:
+  html_document:
+    toc: true
+    toc_depth : 4
+    theme: united
+    highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+*I recognize, and fully understand, that this data maybe emotionally difficult to work. My intention is to make these lab relevant, allowing you to gather your own insights directly from new visualizations of the data. Please let me know if you would rather not work with the data.*
+
+## Learning Objectives
+
+* More on Maps
+* Learning to animate graphs with gganimate
+* How to make R Shiny Apps
+
+[gganimate](https://gganimate.com/)
+
+
+## Tutorials and resources
+
+1. [Maps in R using maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
+1. [geom_maps](https://ggplot2.tidyverse.org/reference/geom_map.html)
+1. [Drawing beautiful maps programmatically with R, sf and ggplot2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html)
+
+
+## Learning Objectives
+
+* More on Maps
+* Learning to animate graphs with gganimate
+* How to make R Shiny Apps
+
+## Creating Country, State and County maps
+
+The ideas for this course tutorial came from multiple examples contributed by Prof. Chris Sunderland and these tutorials
+
+1. [Maps in R using maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
+1. [geom_maps](https://ggplot2.tidyverse.org/reference/geom_map.html)
+1. [Drawing beautiful maps programmatically with R, sf and ggplot2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html)
+
+For our labs two types of approaches will be used to add data to maps. The first that we worked with last week is based on using the longitude and latitude information to add a point at a specific position on a map. The second is two add the information to shapes in a map based on the name of the shape (e.g. states). Although ggmaps is a wonderful tool for mapping using Google Maps and other resources, it is beyond what is needed for now.
+
+As in Lab 9 the sources of data are from [Github repo for Novel Coronavirus (COVID-19) Cases](https://github.com/CSSEGISandData/COVID-19) that supports the [dashboard](https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6).
+
+For this lab it is important to note that the time series data does not currently have entries for US States. The daily reports include US State and more recently US country/administrative units. Is possible to concatenate the daily reports to create a time series for US States, but cognizant of changes in the formats of the daily reports.
+
+### Building off last weeks examples
+
+From the example from Prof. Chris Sunderland
+```{r, warmings=FALSE, message=FALSE}
+library(tidyverse)
+library(maps)
+library(mapdata)
+library(lubridate)
+library(viridis)
+library(wesanderson)
+```
+
+Here is a graph containing all the coordinate information. Note this is not summarized by country. Since there are now main points for US counties, there are many points in the US
+
+```{r, warnings=FALSE, message=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-31-2020.csv")) %>% 
+  rename(Long = "Long_") 
+    
+ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed/1000)) +
+    borders("world", colour = NA, fill = "grey90") +
+    theme_bw() +
+    geom_point(shape = 21, color='purple', fill='purple', alpha = 0.5) +
+    labs(title = 'World COVID-19 Confirmed cases',x = '', y = '',
+        size="Cases (x1000))") +
+    theme(legend.position = "right") +
+    coord_fixed(ratio=1.5)
+```
+
+Zoom in on US 48 states. To do this Alaska, Hawaii and US Territories are filtered. Some US State entries have a Lat and Long of zero, so these are filtered as well. 
+
+```{r, warnings=FALSE, message=FALSE}
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-27-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Country_Region == "US") %>% 
+  filter (!Province_State %in% c("Alaska","Hawaii", "American Samoa",
+                  "Puerto Rico","Northern Mariana Islands", 
+                  "Virgin Islands", "Recovered", "Guam", "Grand Princess",
+                  "District of Columbia", "Diamond Princess")) %>% 
+  filter(Lat > 0)
+
+ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed/1000)) +
+    borders("state", colour = "black", fill = "grey90") +
+    theme_bw() +
+    geom_point(shape = 21, color='purple', fill='purple', alpha = 0.5) +
+    labs(title = 'COVID-19 Confirmed Cases in the US', x = '', y = '',
+        size="Cases (x1000))") +
+    theme(legend.position = "right") +
+    coord_fixed(ratio=1.5)
+```
+ 
+Here is a prettier version based on the example by Anisa Dhana
+
+```{r, warnings=FALSE, message=FALSE}
+mybreaks <- c(1, 100, 1000, 10000, 10000)
+
+ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed)) +
+    borders("state", colour = "white", fill = "grey90") +
+    geom_point(aes(x=Long, y=Lat, size=Confirmed, color=Confirmed),stroke=F, alpha=0.7) +
+    scale_size_continuous(name="Cases", trans="log", range=c(1,7), 
+                        breaks=mybreaks, labels = c("1-99",
+                        "100-999", "1,000-9,999", "10,000-99,999", "50,000+")) +
+    scale_color_viridis_c(option="viridis",name="Cases",
+                        trans="log", breaks=mybreaks, labels = c("1-99",
+                        "100-999", "1,000-9,999", "10,000-99,999", "50,000+"))  +
+# Cleaning up the graph
+  
+  theme_void() + 
+    guides( colour = guide_legend()) +
+    labs(title = "COVID-19 Confirmed Cases in the US'") +
+    theme(
+      legend.position = "bottom",
+      text = element_text(color = "#22211d"),
+      plot.background = element_rect(fill = "#ffffff", color = NA), 
+      panel.background = element_rect(fill = "#ffffff", color = NA), 
+      legend.background = element_rect(fill = "#ffffff", color = NA)
+    ) +
+    coord_fixed(ratio=1.5)
+```
+
+* Note that in both examples the ggplot funtion __borders__ is used to define the areas in the map
+
+### Mapping data to shapes
+
+```{r, warnings=FALSE, message=FALSE}
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-27-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Country_Region == "US") %>% 
+  group_by(Province_State) %>% 
+  summarize(Confirmed = sum(Confirmed)) %>% 
+  mutate(Province_State = tolower(Province_State))
+
+# load the US map data
+us <- map_data("state")
+# We need to join the us map data with our daily report to make one data frame/tibble
+state_join <- left_join(us, daily_report, by = c("region" = "Province_State"))
+
+# plot state map
+ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+# Add data layer
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "white") +
+  geom_polygon(color = "black", fill = NA) +
+  scale_fill_gradient(trans = "log10") +
+  labs(title = "COVID-19 Confirmed Cases in the US'")
+```
+
+#### Using R color palattes
+
+This is a bit of a digression back to Labs 3 and 4, but there are many R color palattes to choose from or you can create your own. In the above a simple gradient is used. The example from Anisa Dhana uses the viridis palatte which is designed to be perceived by viewers with common forms of colour blindness. Here is an example using a different color package - Wes Anderson. ...and more [	
+Top R Color Palettes to Know for Great Data Visualization](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)
+
+```{r, warnings=FALSE, message=FALSE}
+# plot state map
+ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+# Add data layer
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "white") +
+  geom_polygon(color = "black", fill = NA) +
+  scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous"),
+                         trans = "log10") +
+  labs(title = "COVID-19 Confirmed Cases in the US'")
+```
+
+If we look at just Massachusetts
+
+```{r, warnings=FALSE, message=FALSE}
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-27-2020.csv")) %>% 
+  rename(Long = "Long_") %>% 
+  filter(Province_State == "Massachusetts") %>% 
+  group_by(Admin2) %>% 
+  summarize(Confirmed = sum(Confirmed)) %>% 
+  mutate(Admin2 = tolower(Admin2))
+
+us <- map_data("state")
+ma_us <- subset(us, region == "massachusetts")
+counties <- map_data("county")
+ma_county <- subset(counties, region == "massachusetts")
+
+state_join <- left_join(ma_county, daily_report, by = c("subregion" = "Admin2")) 
+
+# plot state map
+ggplot(data = ma_county, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+# Add data layer
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "white") +
+    scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous"),
+                         trans = "log10") +
+  labs(title = "COVID-19 Confirmed Cases in Massachusetts'")
+```
+
+* Note the cases on Nantucket and Dukes counties were reported as one value and not included on the graph. There is also an asssigned category that includes 303 Confirmed cases as of 3/31/2020.
+```{r}
+daily_report
+```
+
+### Interactive graphs
+
+In Lab 4 plotly was introduced. It is a great simple way to make interactive graphs
+
+```{r, warnings=FALSE, message=FALSE}
+library(plotly)
+
+ggplotly(
+  ggplot(data = ma_county, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_fixed(1.3) + 
+# Add data layer
+  geom_polygon(data = state_join, aes(fill = Confirmed), color = "black") +
+    scale_fill_gradientn(colours = 
+                         wes_palette("Zissou1", 100, type = "continuous")) +
+  ggtitle("COVID-19 Cases in MA") +
+# Cleaning up the graph
+  labs(x=NULL, y=NULL) +
+  theme(panel.border = element_blank()) +
+  theme(panel.background = element_blank()) +
+  theme(axis.ticks = element_blank()) +
+  theme(axis.text = element_blank())
+)
+```
+
+### Animated Graphs with gganime
+
+Animated graphs when down right have a great visual impact. You can do this in R and have your animations embedded on your web page. Essentially gganimate creates a series of files that are encompassed in a gif file. In addition to having this gif as part of your report file, you can save the gif and use in a slide or other presentations. It just takes a few lines of code to covert and existing ggplot graph into an animation. See [Tutorial for Getting Started with gganimate](https://gganimate.com/articles/gganimate.html) and
+[gganimate: How to Create Plots with Beautiful Animation in R](https://www.datanovia.com/en/blog/gganimate-how-to-create-plots-with-beautiful-animation-in-r/)
+
+This are some important gganimate functions:
+
+* __transition_*()__ defines how the data should be spread out and how it relates to itself across time.
+* __view_*()__ defines how the positional scales should change along the animation.
+* __shadow_*()__ defines how data from other points in time should be presented in the given point in time.
+*  __enter_*()/exit_*()__ defines how new data should appear and how old data should disappear during the course of the animation.
+* __ease_aes()__ defines how different aesthetics should be eased during transitions.
+
+### Preparing the times series data
+
+The time series data is ripe for animation but first we need to get and format the files
+
+```{r, warnings=FALSE, message=FALSE}
+time_series_confirmed_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region")  %>% 
+               pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+                            names_to = "Date", values_to = "Confirmed") 
+
+# Let's get the times series data for deaths
+
+time_series_deaths_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")) %>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region")  %>% 
+  pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+               names_to = "Date", values_to = "Deaths")
+
+time_series_recovered_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")) %>%
+  rename(Province_State = "Province/State", Country_Region = "Country/Region") %>% 
+  pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+               names_to = "Date", values_to = "Recovered")
+
+# Create Keys 
+
+time_series_confirmed_long <- time_series_confirmed_long %>% 
+  unite(Key, Province_State, Country_Region, Date, sep = ".", remove = FALSE)
+
+time_series_deaths_long <- time_series_deaths_long %>% 
+  unite(Key, Province_State, Country_Region, Date, sep = ".") %>% 
+  select(Key, Deaths)
+
+time_series_recovered_long <- time_series_recovered_long %>% 
+  unite(Key, Province_State, Country_Region, Date, sep = ".") %>% 
+  select(Key, Recovered)
+
+# Join tables
+time_series_long_joined <- full_join(time_series_confirmed_long,
+              time_series_deaths_long, by = c("Key"))
+
+time_series_long_joined <- full_join(time_series_long_joined,
+              time_series_recovered_long, by = c("Key")) %>% 
+    select(-Key)
+
+# Reformat the data
+time_series_long_joined$Date <- mdy(time_series_long_joined$Date)
+
+# Create Report table with counts
+time_series_long_joined_counts <- time_series_long_joined %>% 
+  pivot_longer(-c(Province_State, Country_Region, Lat, Long, Date),
+               names_to = "Report_Type", values_to = "Counts")
+
+```
+
+### plotting with gganimate
+
+Below are the packages I installed. There may be others that you need, in particular to rendering gifs. Some of the example may take several minutes to create the animation.
+
+```{r, warnings=FALSE, message=FALSE}
+library(ggplot2)
+library(gganimate)
+library(transformr)
+theme_set(theme_bw())
+```
+
+An animation of the confirmed cases in select countries
+
+```{r, warnings=FALSE, message=FALSE}
+time_series_long_joined %>% 
+    group_by(Country_Region,Date) %>% 
+    summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
+    filter (Country_Region %in% c("China","Korea, South","Japan","US")) %>% 
+    ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+    geom_point() +
+    geom_line() +
+    ggtitle("Confirmed COVID-19 Cases") +
+    geom_point(aes(group = seq_along(Date))) +
+    transition_reveal(Date) 
+```
+
+Animation for Prof. Chris Sunderland's example
+
+```{r, warnings=FALSE, message=FALSE}
+covid <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
+           rename(Province_State= "Province/State", Country_Region = "Country/Region") %>%
+           pivot_longer(-c(Province_State, Country_Region, Lat, Long),
+                  names_to = "Date", values_to = "Confirmed") %>%
+           mutate(Date = mdy(Date) - days(1),
+                  Place = paste(Lat,Long,sep="_")) %>%
+# Summarizes state and province information
+             group_by(Place,Date) %>%
+           summarise(cumulative_cases = ifelse(sum(Confirmed)>0,
+                     sum(Confirmed),NA_real_),
+                     Lat = mean(Lat),
+                     Long = mean(Long)) %>%
+           mutate(Pandemic_day = as.numeric(Date - min(Date)))
+
+world <- ggplot(covid,aes(x = Long, y = Lat, size = cumulative_cases/1000)) +
+                 borders("world", colour = "gray50", fill = "grey90") +
+                 theme_bw() +
+                 geom_point(color='purple', alpha = .5) +
+                 labs(title = 'Pandemic Day: {frame}',x = '', y = '',
+                      size="Cases (x1000))") +
+                 theme(legend.position = "right") +
+                 coord_fixed(ratio=1.5)+
+                 transition_time(Date) +
+                 enter_fade()
+
+world
+```
+
+## Exercises
+
+For Lab 10 created a report with static maps, interactive graphs and animations that is meant to be read by others. Hide warnings, messages and even the code you used so that it is readable. Included references. Link to the Lab 10 report from your Github site. Submit the link to Moodle.
