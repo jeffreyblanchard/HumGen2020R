@@ -313,16 +313,19 @@ theme_set(theme_bw())
 An animation of the confirmed cases in select countries
 
 ```{r, warnings=FALSE, message=FALSE}
-time_series_long_joined %>% 
+data_time <- time_series_long_joined %>% 
     group_by(Country_Region,Date) %>% 
     summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
-    filter (Country_Region %in% c("China","Korea, South","Japan","US")) %>% 
-    ggplot(aes(x = Date,  y = Confirmed, color = Country_Region)) + 
-    geom_point() +
-    geom_line() +
-    ggtitle("Confirmed COVID-19 Cases") +
-    geom_point(aes(group = seq_along(Date))) +
-    transition_reveal(Date) 
+    filter (Country_Region %in% c("China","Korea, South","Japan","US")) 
+
+p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+      geom_point() +
+      geom_line() +
+      ggtitle("Confirmed COVID-19 Cases") +
+      geom_point(aes(group = seq_along(Date))) +
+      transition_reveal(Date) 
+    
+animate(p, end_pause = 15)
 ```
 
 Animation for Prof. Chris Sunderland's example
@@ -349,11 +352,11 @@ world <- ggplot(covid,aes(x = Long, y = Lat, size = cumulative_cases/1000)) +
                  labs(title = 'Pandemic Day: {frame}',x = '', y = '',
                       size="Cases (x1000))") +
                  theme(legend.position = "right") +
-                 coord_fixed(ratio=1.5)+
+                 coord_fixed(ratio=1.3)+
                  transition_time(Date) +
                  enter_fade()
 
-world
+animate(world, end_pause = 30)
 ```
 
 ## Exercises
