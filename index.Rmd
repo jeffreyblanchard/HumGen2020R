@@ -31,7 +31,7 @@ This is an html rendering of the repository (https://github.com/jeffreyblanchard
 
 ### Genealogies
 
-* 8 : [Genealogical Trees](Lab8_HuGen.html)
+* 8 : [Genealogical Trees](Lab8_HuGen_2020.html)
 
 ### COVID-19 reporting data and SARS-CoV-2 genome analysis
 

@@ -297,6 +297,7 @@ time_series_long_joined %>%
     ggtitle("US Confirmed COVID-19 Cases")
 ```
 
+
 Let's look at the US data in the context of a few other countries
 
 ```{r}
