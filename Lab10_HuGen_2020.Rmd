@@ -1,5 +1,5 @@
 ---
-title: "Human Genome Analysis Lab 10 : Working with COVID-19 reporting data  "
+title: "Human Genome Analysis Lab 10 : Data Maps, Interactive Graphs and Animations from the COVID-19 reporting data"
 output:
   html_document:
     toc: true
@@ -9,6 +9,10 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
 
 *I recognize, and fully understand, that this data maybe emotionally difficult to work. My intention is to make these lab relevant, allowing you to gather your own insights directly from new visualizations of the data. Please let me know if you would rather not work with the data.*
 
@@ -205,7 +209,7 @@ ggplot(data = ma_county, mapping = aes(x = long, y = lat, group = group)) +
 daily_report
 ```
 
-### Interactive graphs
+## Interactive graphs
 
 In Lab 4 plotly was introduced. It is a great simple way to make interactive graphs
 
@@ -229,7 +233,7 @@ ggplotly(
 )
 ```
 
-### Animated Graphs with gganime
+## Animated Graphs with gganimate
 
 Animated graphs when down right have a great visual impact. You can do this in R and have your animations embedded on your web page. Essentially gganimate creates a series of files that are encompassed in a gif file. In addition to having this gif as part of your report file, you can save the gif and use in a slide or other presentations. It just takes a few lines of code to covert and existing ggplot graph into an animation. See [Tutorial for Getting Started with gganimate](https://gganimate.com/articles/gganimate.html) and
 [gganimate: How to Create Plots with Beautiful Animation in R](https://www.datanovia.com/en/blog/gganimate-how-to-create-plots-with-beautiful-animation-in-r/)
@@ -295,7 +299,7 @@ time_series_long_joined_counts <- time_series_long_joined %>%
 
 ```
 
-### plotting with gganimate
+### Creating the animations
 
 Below are the packages I installed. There may be others that you need, in particular to rendering gifs. Some of the example may take several minutes to create the animation.
 
