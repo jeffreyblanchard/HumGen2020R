@@ -40,7 +40,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ## Creating Country, State and County maps
 
-The ideas for this course tutorial came from multiple examples contributed by Prof. Chris Sunderland and these tutorials
+The ideas for this course tutorial came from multiple examples contributed by Prof. Chris Sutherland and these tutorials
 
 1. [Maps in R using maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
 1. [geom_maps](https://ggplot2.tidyverse.org/reference/geom_map.html)
@@ -54,7 +54,7 @@ For this lab it is important to note that the time series data does not currentl
 
 ### Building off last weeks examples
 
-From the example from Prof. Chris Sunderland
+From the example from Prof. Chris Sutherland
 ```{r, warmings=FALSE, message=FALSE}
 library(tidyverse)
 library(maps)
@@ -335,7 +335,7 @@ time_series_long_joined_counts <- time_series_long_joined %>%
 
 ### Creating the animations
 
-Below are the packages I installed. There may be others that you need, in particular to rendering gifs. Some of the example may take several minutes to create the animation.
+Below are the packages I installed. There may be others that you need, in particular to rendering gifs. Several people needed to install the packages __gifski__ and __av__ Some of the examples may take several minutes to create the animation.
 
 ```{r, warnings=FALSE, message=FALSE}
 library(ggplot2)
@@ -358,11 +358,14 @@ p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) +
       ggtitle("Confirmed COVID-19 Cases") +
       geom_point(aes(group = seq_along(Date))) +
       transition_reveal(Date) 
-    
+
+# Some people needed to use this line instead
+# animate(p,renderer = gifski_renderer(), end_pause = 15)
 animate(p, end_pause = 15)
+
 ```
 
-Animation for Prof. Chris Sunderland's example
+Animation for Prof. Chris Sutherland's example
 
 ```{r, warnings=FALSE, message=FALSE}
 covid <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
@@ -390,6 +393,8 @@ world <- ggplot(covid,aes(x = Long, y = Lat, size = cumulative_cases/1000)) +
                  transition_time(Date) +
                  enter_fade()
 
+# Some people needed to use this line instead
+# animate(world,renderer = gifski_renderer(), end_pause = 30)
 animate(world, end_pause = 30)
 ```
 

@@ -343,7 +343,7 @@ time_series_long_joined_counts %>%
 
 ### Visualizing data on maps
 
-Here are two examples provided by Prof. Chris Sunderland and Anisa Dhana. They both rely on using the __maps__ package. For ideas on how to build on these examples here is a nice tutorial on Maps in R using [maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
+Here are two examples provided by Prof. Chris Sutherland and Anisa Dhana. They both rely on using the __maps__ package. For ideas on how to build on these examples here is a nice tutorial on Maps in R using [maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
 
 #### Adaptation of a post from Anisa Dhana on [R-Bloggers](https://www.r-bloggers.com/map-visualization-of-covid-19-across-the-world-with-r/) 
 
@@ -387,7 +387,7 @@ ggplot() +
   )
 ```
 
-#### Adaptation of code from Prof. Chris Sunderland
+#### Adaptation of code from Prof. Chris Sutherland
 
 Get data, pivot to longer format, mutate and summarize
 
