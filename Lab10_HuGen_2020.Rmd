@@ -18,25 +18,9 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ## Learning Objectives
 
-* More on Maps
-* Learning to animate graphs with gganimate
-* How to make R Shiny Apps
-
-[gganimate](https://gganimate.com/)
-
-
-## Tutorials and resources
-
-1. [Maps in R using maps](https://cran.r-project.org/web/packages/maps/maps.pdf) by [Eric Anderson](http://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)
-1. [geom_maps](https://ggplot2.tidyverse.org/reference/geom_map.html)
-1. [Drawing beautiful maps programmatically with R, sf and ggplot2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html)
-
-
-## Learning Objectives
-
-* More on Maps
-* Learning to animate graphs with gganimate
-* How to make R Shiny Apps
+* Making shape maps
+* Interactive graphs
+* Animating graphs with gganimate
 
 ## Creating Country, State and County maps
 
@@ -350,9 +334,9 @@ An animation of the confirmed cases in select countries
 data_time <- time_series_long_joined %>% 
     group_by(Country_Region,Date) %>% 
     summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
-    filter (Country_Region %in% c("China","Korea, South","Japan","US")) 
+    filter (Country_Region %in% c("China","Korea, South","Japan","Italy","US")) 
 
-p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) + 
+p <- ggplot(data_time, aes(x = Date,  y = Deaths, color = Country_Region)) + 
       geom_point() +
       geom_line() +
       ggtitle("Confirmed COVID-19 Cases") +
