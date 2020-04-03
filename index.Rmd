@@ -4,7 +4,7 @@ output:
   pdf_document: default
 ---
 
-This is an html rendering of the repository (https://github.com/jeffreyblanchard/GenomeAnalysisR) for the course Human Genome Analysis in R taught at the University of Massachusetts Amherst in Spring 2020 by Prof. Jeffrey Blanchard
+This is rendering hmtl files from the course repository  (https://github.com/jeffreyblanchard/GenomeAnalysisR) for Human Genome Analysis in R taught at the University of Massachusetts Amherst in Spring 2020 by Prof. Jeffrey Blanchard
 
 ## Labs
 
