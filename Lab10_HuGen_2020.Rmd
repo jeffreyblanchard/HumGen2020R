@@ -51,7 +51,7 @@ library(wesanderson)
 Here is a graph containing all the coordinate information. Note this is not summarized by country. Since there are now main points for US counties, there are many points in the US
 
 ```{r, warnings=FALSE, message=FALSE}
-daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-01-2020.csv")) %>% 
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
   rename(Long = "Long_") 
     
 ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed/1000)) +
@@ -67,7 +67,7 @@ ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed/1000)) +
 Zoom in on US 48 states. To do this Alaska, Hawaii and US Territories are filtered. Some US State entries have a Lat and Long of zero, so these are filtered as well. 
 
 ```{r, warnings=FALSE, message=FALSE}
-daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-27-2020.csv")) %>% 
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   filter(Country_Region == "US") %>% 
   filter (!Province_State %in% c("Alaska","Hawaii", "American Samoa",
@@ -120,7 +120,7 @@ ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed)) +
 ### Mapping data to shapes
 
 ```{r, warnings=FALSE, message=FALSE}
-daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-27-2020.csv")) %>% 
+daily_report <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   filter(Country_Region == "US") %>% 
   group_by(Province_State) %>% 
@@ -164,7 +164,7 @@ library(RColorBrewer)
 # display.brewer.all(colorblindFriendly = TRUE)
 
 # Get and format the covid report data
-report_03_27_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-01-2020.csv")) %>% 
+report_03_27_2020 <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   unite(Key, Admin2, Province_State, sep = ".") %>% 
   group_by(Key) %>% 
@@ -198,7 +198,7 @@ ggplot(data = us, mapping = aes(x = long, y = lat, group = group)) +
 If we look at just Massachusetts
 
 ```{r, warnings=FALSE, message=FALSE}
-daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/03-27-2020.csv")) %>% 
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   filter(Province_State == "Massachusetts") %>% 
   group_by(Admin2) %>% 
@@ -349,7 +349,7 @@ animate(p, end_pause = 15)
 
 ```
 
-Animation for Prof. Chris Sutherland's example
+Adaption of animation code from Prof. Chris Sutherland
 
 ```{r, warnings=FALSE, message=FALSE}
 covid <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
@@ -384,4 +384,4 @@ animate(world, end_pause = 30)
 
 ## Exercises
 
-For Lab 10 created a report with static maps, interactive graphs and animations that is meant to be read by others. Hide warnings, messages and even the code you used so that it is readable. Included references. Link to the Lab 10 report from your Github site. Submit the link to Moodle.
+For Lab 10 created a report with static maps, interactive graphs and animations that is meant to be read by others (e.g. your friends and family). Hide warnings, messages and even the code you used so that it is readable. Included references. Link to the Lab 10 report from your Github site. Submit the link to Moodle.
