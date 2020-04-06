@@ -64,10 +64,11 @@ ggplot(daily_report, aes(x = Long, y = Lat, size = Confirmed/1000)) +
     coord_fixed(ratio=1.5)
 ```
 
-Zoom in on US 48 states. To do this Alaska, Hawaii and US Territories are filtered. Some US State entries have a Lat and Long of zero, so these are filtered as well. 
+Zoom in on US 48 states. To do this Alaska, Hawaii and US Territories are filtered
+. Some US State entries have a Lat and Long of zero, so these are filtered as well. 
 
 ```{r, warnings=FALSE, message=FALSE}
-daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-02-2020.csv")) %>% 
+daily_report <-   read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/04-05-2020.csv")) %>% 
   rename(Long = "Long_") %>% 
   filter(Country_Region == "US") %>% 
   filter (!Province_State %in% c("Alaska","Hawaii", "American Samoa",
@@ -336,7 +337,7 @@ data_time <- time_series_long_joined %>%
     summarise_at(c("Confirmed", "Deaths", "Recovered"), sum) %>% 
     filter (Country_Region %in% c("China","Korea, South","Japan","Italy","US")) 
 
-p <- ggplot(data_time, aes(x = Date,  y = Deaths, color = Country_Region)) + 
+p <- ggplot(data_time, aes(x = Date,  y = Confirmed, color = Country_Region)) + 
       geom_point() +
       geom_line() +
       ggtitle("Confirmed COVID-19 Cases") +
