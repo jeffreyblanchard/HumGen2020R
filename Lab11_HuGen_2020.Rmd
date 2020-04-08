@@ -23,7 +23,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ## RShiny Overview and tutorial
 
-For this lab session we will use an [Introduction to Shiny](https://learning.nceas.ucsb.edu/2020-02-RRCourse/introduction-to-shiny.html)l developed by staff at the [National Center for Ecological Analysis and Synthesis (NCEAS)](https://www.nceas.ucsb.edu/) for a workshop on [Reproducible Research](https://learning.nceas.ucsb.edu/)
+For this lab session we will use an [Introduction to Shiny](https://learning.nceas.ucsb.edu/2020-02-RRCourse/introduction-to-shiny.html) developed by staff at the [National Center for Ecological Analysis and Synthesis (NCEAS)](https://www.nceas.ucsb.edu/) for a workshop on [Reproducible Research](https://learning.nceas.ucsb.edu/)
 
 ### Notes
 
@@ -47,10 +47,12 @@ After replacing server code block to graph the bgchem data
 
 2. Make a Shiny App with a graph of the time series data with the US and four other countries. Allow the user to select with type of reporting data (Confirmed, Deaths, Recovered) to be shown in the graph.
 
-3. Now add to #2 by allowing the user to select which Country_Region  
+3. Now add to #2 by allowing the user to select which Country_Region 
 
-4. Create a single Shiny app with the above three graphs (and any others you will to add) and publish it on shinyapps.io
+4. Create a Shiny app using a geographical map.
 
-5. On your Github web page add a link to your Shiny apps on shinyapps.io
+5. Create a single Shiny app with the above 4 graphs (and any others you will to add) and publish it on shinyapps.io
+
+6. On your Github web page add a link to your Shiny apps on shinyapps.io
 
 On Moodle turn in the link to your Github web page
