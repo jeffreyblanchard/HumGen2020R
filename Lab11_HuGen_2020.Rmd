@@ -23,19 +23,34 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ## RShiny Overview and tutorial
 
+
 For this lab session we will use an [Introduction to Shiny](https://learning.nceas.ucsb.edu/2020-02-RRCourse/introduction-to-shiny.html) developed by staff at the [National Center for Ecological Analysis and Synthesis (NCEAS)](https://www.nceas.ucsb.edu/) for a workshop on [Reproducible Research](https://learning.nceas.ucsb.edu/)
 
 ### Notes
 
-* Shiny apps are not created in RMarkdown. They are a different file type. A new one can be created selecting File > New File > Shiny Web App
-
+* Install the shiny package before starting the tutorial.
+* Shiny apps are not created in RMarkdown. They are a different file type, but more similar to R scripts.
+* A new __app.R__ file can be created selecting File > New File > Shiny Web App
+* Add data import and wrangling related code to the beginning of the file, just after you load the libraries.
+* You will need to load the tidyverse library, so be sure to add to the beginning of the code.
+* Be careful when you copy and paste to not add or remove brackets.
 * Once you publish you Shiny App (e.g. to shinyapps.io) you can create a link in your RMarkdown file (e.g. index.Rmd) to the shinyapps.io URL.
+
+#### 18.4.1
+
+replace 
+
+__bg_chem <- read.csv(data_url, stringsAsFactors = FALSE)__
+
+with
+
+__bg_chem <- read.csv(url(data_url, method="libcurl"), stringsAsFactors = FALSE)__
 
 #### 18.4.2
 
 After replacing server code block to graph the bgchem data
 
-* Change plotOutput("distPlot") to  plotOutput("depthPlot")
+* Change __plotOutput("distPlot")__ to  __plotOutput("depthPlot")__
 
 #### 18.6 +
 
