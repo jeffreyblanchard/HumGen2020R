@@ -1,0 +1,143 @@
+---
+title: "Human Genome Analysis Lab 12 : Redux - R Shiny apps using the COVID-19 reporting data"
+output:
+  html_document:
+    toc: true
+    toc_depth : 4
+    theme: united
+    highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+*I recognize, and fully understand, that this data maybe emotionally difficult to work. My intention is to make these lab relevant, allowing you to gather your own insights directly from new visualizations of the data. Please let me know if you would rather not work with the data.*
+
+## Learning Objectives
+
+* The basics of making Rshiny interactive applications
+* Creating a Rshiny app with the covid reporting data
+
+## Shiny Overview and tutorial
+
+The first step is to install the __shiny__ package
+
+You can run an example shiny app by typing the following in the R console
+
+```{r, eval = FALSE}
+library(shiny)
+runExample("01_hello")
+```
+
+There is a great starterr set of 7 [Shiny tutorials](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/) written by RStudio that include examples and code snippets related to visualizing the COVID-19 reporting data. I highly recommend going through these.
+
+### Structure of an app.R file
+
+Then let's examing the example new file (which is also the same as 01_hello. Go to File > New File > Shiny Web App
+
+Click on the Run button and the App will be built
+
+app.R has three components:
+
+    a user interface object
+
+    a server function
+
+    a call to the shinyApp function
+
+It you open a new Shiny file you can see these three components
+
+```{r, eval=FALSE}
+# Define UI for application that draws a histogram
+ui <- fluidPage(...
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {...
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+The user interface (ui) object controls the layout and appearance of your app. The server function contains the instructions that your computer needs to build your app. Finally the shinyApp function creates Shiny app objects from an explicit UI/server pair.
+
+Notice the call to load the libaries (in this case __shiny__) comes before the code for the shiny app. Other code that feeds into your app (e.g. loading and manipulating data) also comes before the shiny app.
+
+## Shiny examples using the COVID-19 Reporting data
+
+In the [class GitHub repository](https://github.com/jeffreyblanchard/GenomeAnalysisR) there are two examples of shiny apps using the COV-19 Reporting data in the Lab12_HuGen_ShinyApps directory. I have also putting the apps on shiny.io [Example Map](https://jeffreyblanchard.shinyapps.io/ExampleMap/) and [Example Graph](https://jeffreyblanchard.shinyapps.io/ExampleGraph/). * This may take a while to load depending on your computer and internet connection.
+
+In lab today we will code behind some important steps in developing Shiny apps from the COVID-19 reporting data.
+
+## The JHU GitHub repository updates
+
+JHU GitHub repository now includes time series data for US states and counties. Here is some starter code for making graphs from this data set. It should be possible to use this data for making Shiny Apps
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+```{r, warnings=FALSE, message=FALSE}
+US_time_series_confirmed_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv")) %>%
+    select(-c(UID, iso2, iso3, code3, FIPS)) %>% 
+    rename(Long = "Long_") %>%
+    pivot_longer(-c(Admin2, Province_State, Country_Region, Lat, Long, Combined_Key),
+    names_to = "Date", values_to = "Confirmed") 
+# Let's get the times series data for deaths
+US_time_series_deaths_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv")) %>%
+    select(-c(UID, iso2, iso3, code3, FIPS)) %>% 
+    rename(Long = "Long_") %>%
+    pivot_longer(-c(Admin2, Province_State, Country_Region, Lat, Long, Combined_Key),
+    names_to = "Date", values_to = "Deaths")
+# Create Keys 
+US_time_series_confirmed_long <- US_time_series_confirmed_long %>% 
+  unite(Key, Combined_Key, Date, sep = ".", remove = FALSE)
+US_time_series_deaths_long <- US_time_series_deaths_long %>% 
+  unite(Key, Combined_Key, Date, sep = ".") %>% 
+  select(Key, Deaths)
+
+# Join tables
+US_time_series_long_joined <- full_join(US_time_series_confirmed_long,
+              US_time_series_deaths_long, by = c("Key")) %>% 
+    select(-Key)
+# Reformat the data
+US_time_series_long_joined$Date <- mdy(US_time_series_long_joined$Date)
+# Rename
+US_time_series <- US_time_series_long_joined
+```
+
+Graph with states
+
+```{r}
+US_data_time <- US_time_series %>% 
+    group_by(Province_State,Date) %>% 
+    summarise_at(c("Confirmed", "Deaths"), sum) %>% 
+    filter (Province_State %in% c("Massachusetts","Connecticut","New Jersey", "Michigan", "Louisiana")) 
+
+ggplot(US_data_time, aes(x = Date,  y = Deaths, color = Province_State)) + 
+      geom_point() +
+      geom_line() +
+      ggtitle("Confirmed COVID-19 Deaths") 
+```
+
+Graph with Massachusetts counties
+
+```{r}
+US_data_time <- US_time_series %>% 
+    filter (Province_State == "Massachusetts") %>% 
+    group_by(Admin2, Date) %>% 
+    summarise_at(c("Confirmed", "Deaths"), sum) 
+
+ggplot(US_data_time, aes(x = Date,  y = Confirmed, color = Admin2)) + 
+      geom_point() +
+      geom_line() +
+      ggtitle("Confirmed COVID-19 cases") 
+```
+
+## Exercises
+
+There are no new exercises, only a challenge to be more creative with your Shiny Apps building off these examples and the new data set.
+

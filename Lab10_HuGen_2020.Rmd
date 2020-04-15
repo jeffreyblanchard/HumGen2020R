@@ -255,7 +255,7 @@ The time series data is ripe for animation but first we need to get and format t
 time_series_confirmed_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")) %>%
   rename(Province_State = "Province/State", Country_Region = "Country/Region")  %>% 
                pivot_longer(-c(Province_State, Country_Region, Lat, Long),
-                            names_to = "Date", values_to = "Confirmed") 
+                             names_to = "Date", values_to = "Confirmed") 
 # Let's get the times series data for deaths
 time_series_deaths_long <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")) %>%
   rename(Province_State = "Province/State", Country_Region = "Country/Region")  %>% 
