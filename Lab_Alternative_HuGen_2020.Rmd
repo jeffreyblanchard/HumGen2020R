@@ -1,0 +1,55 @@
+---
+title: "Human Genome Analysis Lab : Alternative to Genetic Testing Report and Presentation - Human Population Data"
+output:
+  html_document:
+    toc: true
+    toc_depth : 4
+    theme: united
+    highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+*I recognize, and fully understand, that this data maybe emotionally difficult to work. My intention is to make these lab relevant, allowing you to gather your own insights directly from new visualizations of the data. Please let me know if you would rather not work with the data.*
+
+## Learning Objectives
+
+* The goal of this lab is to integrate US population data with the COVID-19 reporting data in a Shiny App
+
+## US Census Shiny App
+
+In the RStudio Shiny tutorials [Lesson 5](https://shiny.rstudio.com/tutorial/written-tutorial/lesson5/)
+.  Go through this tutorial to ensure you can create a Shiny App using the US census data package. 
+
+
+## Integrating the US Census data with the COVID-19 reporting data
+
+In [Lesson 5](https://shiny.rstudio.com/tutorial/written-tutorial/lesson5/) there is a step in which you download the census data (counties.rds) to your computer.
+
+```{r}
+counties <- readRDS("ShinyApps/data/counties.rds") # Note I used a different directory
+head(counties)
+```
+
+If you go to [JHU times series reporting data](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series) you can also see that there is country level information on confirmed cases and deaths 
+
+```{r, warnings=FALSE, message=FALSE}
+library(tidyverse)
+US_time_series_confirmed <- read_csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv"))
+head(US_time_series_confirmed, 10)
+```
+
+There is some data wrangling to be done to join the US Census data with the COVID-19 confirmed cases and deaths involving differences in capitalization, merging (or separating columns).  However, I think you are ready for the rodeo based on your accomplishments this semester! Remember there are examples using the covid data at the country level in Lab 10.
+
+## Exercises
+
+1. Create a Shiny App that allows the user to select (1) the date, (2) confirmed cases or deaths and (3) cases per county, cases divided by total population per county and cases per total number of White, Black, Hispanic, or Asian residents of the county (6 items in 3rd menu menu). Plot the results on the US county level map.
+
+Submit the url to your Shiny app in Moodle.
+
+
+
