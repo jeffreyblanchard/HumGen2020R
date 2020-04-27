@@ -47,7 +47,21 @@ There is some data wrangling to be done to join the US Census data with the COVI
 
 ## Exercises
 
-1. Create a Shiny App that allows the user to select (1) the date, (2) confirmed cases or deaths and (3) cases per county, cases divided by total population per county and cases per total number of White, Black, Hispanic, or Asian residents of the county (6 items in 3rd menu menu). Plot the results on the US county level map.
+1. Create a Shiny App that allows the user to select (1) the date, (2) confirmed cases or deaths and (3) cases per county, cases divided by total population per county. Plot the results on the US county level map.
+
+The goal of these exercises are to further develop your data wrangling and graphing skills using real world data. In previous labs we put most of the data wrangling steps upstream of the Shiny App ui and server code. This is prefered because these steps are only do once, not each time a new value or field is selected by the user in the ui or server sections.  
+
+To date the approach for making Shiny Apps to create a single data frame/tibble with the needed data. Using the county map data in combination with census and the US time series covid-19 data generates large tables that can tax your computers RAM memory and cause R to crash. A way to reduce your data frame sizes is to include the user selection before you combine the date. For example in Exercise #1, filtering the time series data by date before joining the table decreases the table length nearly 100x.
+
+For Exercise 1 you could start by
+
+1. Load your libraries
+2. Join county level census data and map data (see example in Lab 10 on working with the map data)
+3. Join the US time series data for the Confirmed Cases and Deaths 
+4. In the ui section get the date from the user
+5. In the server section filter the Confirmed_Deaths data frame based on the date
+6. In the server section join the Confirmed_Deaths and census_map data frames.
+7. Use the above data frame in the graph
 
 Submit the url to your Shiny app in Moodle.
 
