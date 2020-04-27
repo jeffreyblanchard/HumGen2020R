@@ -63,6 +63,8 @@ For Exercise 1 you could start by
 6. In the server section join the Confirmed_Deaths and census_map data frames.
 7. Use the above data frame in the graph
 
+Here is an [example](https://jeffreyblanchard.shinyapps.io/Including_population_data/) that I made. Yours may look different.
+
 Submit the url to your Shiny app in Moodle.
 
 
