@@ -39,7 +39,7 @@ This is rendering hmtl files from the course repository  (https://github.com/jef
 * 10 : [More Geographical Maps, Interactive Graphs and Animations from the COVID-19 reporting data](Lab10_HuGen_2020.html)
 * 11 : [R Shiny apps using the COVID-19 reporting data](Lab11_HuGen_2020.html)
 * 12 : [More on R Shiny apps using the COVID-19 reporting data](Lab12_HuGen_2020.html)
-* 13 : [Integrating COVID-19 reporting and US Census data](Lab_Alternative_2020.html)
+* 13 : [Integrating COVID-19 reporting and US Census data](Lab_Alternative_HuGen_2020.html)
 
 ### Students taking 697 will be expected to complete these following additional labs
 

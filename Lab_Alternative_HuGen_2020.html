@@ -463,7 +463,7 @@ summary {
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb3-2" title="2">US_time_series_confirmed &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">url</span>(<span class="st">&quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv&quot;</span>))</a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="kw">head</span>(US_time_series_confirmed, <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 10 x 107
+<pre><code>## # A tibble: 10 x 108
 ##       UID iso2  iso3  code3  FIPS Admin2 Province_State Country_Region   Lat
 ##     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;
 ##  1 1.60e1 AS    ASM      16    60 &lt;NA&gt;   American Samoa US             -14.3
@@ -476,7 +476,7 @@ summary {
 ##  8 8.40e7 US    USA     840  1005 Barbo… Alabama        US              31.9
 ##  9 8.40e7 US    USA     840  1007 Bibb   Alabama        US              33.0
 ## 10 8.40e7 US    USA     840  1009 Blount Alabama        US              34.0
-## # … with 98 more variables: Long_ &lt;dbl&gt;, Combined_Key &lt;chr&gt;, `1/22/20` &lt;dbl&gt;,
+## # … with 99 more variables: Long_ &lt;dbl&gt;, Combined_Key &lt;chr&gt;, `1/22/20` &lt;dbl&gt;,
 ## #   `1/23/20` &lt;dbl&gt;, `1/24/20` &lt;dbl&gt;, `1/25/20` &lt;dbl&gt;, `1/26/20` &lt;dbl&gt;,
 ## #   `1/27/20` &lt;dbl&gt;, `1/28/20` &lt;dbl&gt;, `1/29/20` &lt;dbl&gt;, `1/30/20` &lt;dbl&gt;,
 ## #   `1/31/20` &lt;dbl&gt;, `2/1/20` &lt;dbl&gt;, `2/2/20` &lt;dbl&gt;, `2/3/20` &lt;dbl&gt;,
@@ -500,7 +500,7 @@ summary {
 ## #   `4/12/20` &lt;dbl&gt;, `4/13/20` &lt;dbl&gt;, `4/14/20` &lt;dbl&gt;, `4/15/20` &lt;dbl&gt;,
 ## #   `4/16/20` &lt;dbl&gt;, `4/17/20` &lt;dbl&gt;, `4/18/20` &lt;dbl&gt;, `4/19/20` &lt;dbl&gt;,
 ## #   `4/20/20` &lt;dbl&gt;, `4/21/20` &lt;dbl&gt;, `4/22/20` &lt;dbl&gt;, `4/23/20` &lt;dbl&gt;,
-## #   `4/24/20` &lt;dbl&gt;, `4/25/20` &lt;dbl&gt;, `4/26/20` &lt;dbl&gt;</code></pre>
+## #   `4/24/20` &lt;dbl&gt;, `4/25/20` &lt;dbl&gt;, `4/26/20` &lt;dbl&gt;, `4/27/20` &lt;dbl&gt;</code></pre>
 <p>There is some data wrangling to be done to join the US Census data with the COVID-19 confirmed cases and deaths involving differences in capitalization, merging (or separating columns). However, I think you are ready for the rodeo based on your accomplishments this semester! Remember there are examples using the covid data at the country level in Lab 10.</p>
 </div>
 <div id="exercises" class="section level2">

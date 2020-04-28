@@ -66,6 +66,3 @@ For Exercise 1 you could start by
 Here is an [example](https://jeffreyblanchard.shinyapps.io/Including_population_data/) that I made. Yours may look different.
 
 Submit the url to your Shiny app in Moodle.
-
-
-
