@@ -23,11 +23,6 @@ This is rendering hmtl files from the course repository  (https://github.com/jef
 ### RNA-seq Analysis
 
 * 7 : [Data Preprocessing and Normalization](Lab7_HuGen_2020.html)
-* i : Data Exploration
-* ii : Differential Expression and Box Plots
-* iii : Genome Visualization
-* iv : Gene Ontology Analysis
-* v : Network Analysis
 
 ### Genealogies
 
@@ -39,7 +34,6 @@ This is rendering hmtl files from the course repository  (https://github.com/jef
 * 10 : [More Geographical Maps, Interactive Graphs and Animations from the COVID-19 reporting data](Lab10_HuGen_2020.html)
 * 11 : [R Shiny apps using the COVID-19 reporting data](Lab11_HuGen_2020.html)
 * 12 : [More on R Shiny apps using the COVID-19 reporting data](Lab12_HuGen_2020.html)
-* 13 : [Integrating COVID-19 reporting and US Census data](Lab_Alternative_HuGen_2020.html)
 
 ### Students taking 697 will be expected to complete these following additional labs
 
@@ -49,4 +43,5 @@ This is rendering hmtl files from the course repository  (https://github.com/jef
 * 16 : [Assessing Read Quality](LabC_697_SNP_mapping.html)
 * 17 : [Trimming and Filtering](LabC_697_SNP_mapping.html)
 * 18 : [Read Mapping - Variant Calling Workflow](LabC_697_SNP_mapping.html)
-* 19 : Read Mapping - Transcript Counts Workflow
+
+* 19 : [Integrating COVID-19 reporting and US Census data](Lab_Alternative_HuGen_2020.html)
